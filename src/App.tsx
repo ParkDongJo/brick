@@ -1,25 +1,25 @@
 import React from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import MainScreen from "./pages/MainScreen"
-import DetailScreen from "./pages/DetailScreen"
+import IndexScreen from "./pages/IndexScreen"
+import SpecialLScreen from './pages/SpecialScreen';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 export type Props = {};
-export type StackParamList = {
-  Main: undefined;
-  Detail: { screenId: number };
+export type TabStackParamList = {
+  Index: undefined;
+  Special: undefined;
 };
 
-const App: React.FC<Props> = () => {
-  const Stack = createNativeStackNavigator<StackParamList>();
+const Tab = createBottomTabNavigator<TabStackParamList>()
 
+const App: React.FC<Props> = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Main" component={MainScreen} />
-        <Stack.Screen name="Detail" component={DetailScreen} />
-      </Stack.Navigator>
+      <Tab.Navigator>
+        <Tab.Screen name="Index" component={IndexScreen} />
+        <Tab.Screen name="Special" component={SpecialLScreen} />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 };
