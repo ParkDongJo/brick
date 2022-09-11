@@ -1,10 +1,20 @@
-import React from "react";
-import { View, Text, Button } from "react-native"
+import React, { useLayoutEffect } from "react";
+import { View, Text, Button, Alert } from "react-native"
 import styled from "styled-components"
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { StackParamList } from "./../App"
+import { ScreenStackParamList } from "./IndexScreen"
+import LogoTitle from "./../components/LogoTitle"
 
 const MainScreen: React.FC<Props> = ({ navigation }) => {
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerTitle: (_props) => <LogoTitle />,
+      headerRight: () => (
+        <Button onPress={() => console.log("Test")} title="Update count" />
+      ),
+    });
+  }, [navigation]);
+
   const handleClick = () => {
     navigation.navigate('Detail', { screenId : 1 })
   }
@@ -18,7 +28,7 @@ const MainScreen: React.FC<Props> = ({ navigation }) => {
 export default MainScreen;
 
 type Props = {
-} &  NativeStackScreenProps<StackParamList, 'Main'>
+} &  NativeStackScreenProps<ScreenStackParamList, 'Main'>
 
 const Container = styled(View)`
   flex: 1;

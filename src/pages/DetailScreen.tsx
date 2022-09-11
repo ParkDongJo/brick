@@ -3,7 +3,7 @@ import { View, Text } from "react-native"
 import styled from "styled-components"
 import type { RouteProp } from '@react-navigation/native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { StackParamList } from "./../App"
+import { ScreenStackParamList } from "./IndexScreen"
 
 const DetailScreen: React.FC<Props> = ({ route, navigation }) => {
     const { screenId } = route.params;
@@ -16,8 +16,8 @@ const DetailScreen: React.FC<Props> = ({ route, navigation }) => {
 export default DetailScreen;
 
 type Props = {
-    route: RouteProp<StackParamList, 'Detail'>;
-} & NativeStackScreenProps<StackParamList>
+    route: RouteProp<ScreenStackParamList, 'Detail'>;
+} & NativeStackScreenProps<ScreenStackParamList>
 
 const Container = styled(View)`
   flex: 1;
