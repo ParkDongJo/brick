@@ -3,7 +3,7 @@ import { View, Text } from "react-native"
 import styled from "styled-components"
 import type { RouteProp } from '@react-navigation/native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { ScreenStackParamList } from "./IndexScreen"
+import { ScreenStackParamList } from "./../lib/StackNavigator";
 
 const DetailScreen: React.FC<Props> = ({ route, navigation }) => {
     const { screenId } = route.params;
