@@ -2,7 +2,7 @@ import React, { useLayoutEffect } from "react";
 import { View, Text, Button, Alert } from "react-native"
 import styled from "styled-components"
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { ScreenStackParamList } from "./IndexScreen"
+import { ScreenStackParamList } from "./../lib/StackNavigator"
 import LogoTitle from "./../components/LogoTitle"
 
 const MainScreen: React.FC<Props> = ({ navigation }) => {
