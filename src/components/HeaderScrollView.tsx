@@ -14,19 +14,15 @@ const HeaderScrollView: React.FunctionComponent<Props> = props => {
   const {headerMinHeight, header, onScroll} = props;
   const headerHeight = HEADER_IMAGE_HEIGHT;
   const scrollYAnim = useRef(new Animated.Value(0)).current;
-  const MAX_HEIGHT = Number.MAX_SAFE_INTEGER - headerHeight;
 
   const headerHeightAni = scrollYAnim.interpolate({
-    inputRange: [-MAX_HEIGHT, headerHeight - headerMinHeight],
-    outputRange: [MAX_HEIGHT + headerHeight, headerMinHeight],
+    inputRange: [0, headerHeight],
+    outputRange: [headerHeight, 0],
     extrapolate: 'clamp',
   });
   const fakeViewPaddingTopAni = scrollYAnim.interpolate({
-    inputRange: [0, headerHeight - headerMinHeight],
-    outputRange: [
-      headerHeight - headerMinHeight,
-      headerHeight + 28 - headerMinHeight,
-    ],
+    inputRange: [0, headerHeight],
+    outputRange: [headerHeight, 0],
     extrapolate: 'clamp',
   });
 
@@ -37,7 +33,7 @@ const HeaderScrollView: React.FunctionComponent<Props> = props => {
       </Animated.View>
       <RootScrollView
         bounces
-        style={{marginTop: headerMinHeight}}
+        style={{marginTop: 0}}
         scrollEventThrottle={16}
         onScroll={(event: NativeSyntheticEvent<NativeScrollEvent>) => {
           scrollYAnim.setValue(event.nativeEvent.contentOffset.y);
@@ -66,6 +62,7 @@ const styles = StyleSheet.create({
     right: 0,
     height: 200,
     overflow: 'hidden',
+    backgroundColor: 'red',
   },
 });
 const RootScrollView = styled(ScrollView)`
