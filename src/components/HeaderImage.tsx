@@ -1,15 +1,15 @@
 import React, {FunctionComponent} from 'react';
 import {Text, View, Image} from 'react-native';
 import styled from 'styled-components';
-import ViewDimension from './../lib/ViewDimension';
+import ViewDimension from './../lib/ViewDimention';
 
 const HeaderImage: FunctionComponent<Props> = props => {
   const {title} = props;
-  const mainImage = require('@zigbang/screens/static/submain/title_bg_image_apt.png');
+  const mainImage = require('./../static/title_bg_image_apt.png');
   const imageHeight = ViewDimension.get().width * 0.833;
 
   return (
-    <Container height={HEADER_IMAGE_HEIGHT}>
+    <Container>
       <Main>
         <Dimmed height={imageHeight} />
         <Image
@@ -31,7 +31,8 @@ export const HEADER_IMAGE_HEIGHT = 300;
 
 const Container = styled(View)`
   position: relative;
-  height: ${ViewDimension.isFoldFrontScreen ? 300 : props => props.height}px;
+  height: ${HEADER_IMAGE_HEIGHT}px;
+  background-color: red;
 `;
 const Main = styled(View)`
   position: relative;
@@ -41,6 +42,7 @@ const Main = styled(View)`
   justify-content: flex-start;
   overflow: hidden;
   margin-bottom: 50px;
+  background-color: blue;
 `;
 const Dimmed = styled(View)`
   position: absolute;
@@ -55,7 +57,6 @@ const TitleText = styled(Text)`
   position: absolute;
   left: 24px;
   top: 150px;
-  font-family: 'Pretendard';
   font-style: normal;
   font-weight: 700;
   font-size: 32px;
