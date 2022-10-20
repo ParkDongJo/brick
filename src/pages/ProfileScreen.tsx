@@ -3,6 +3,7 @@ import {View, Text} from 'react-native';
 import styled from 'styled-components';
 import HeaderScrollView from '../components/HeaderScrollView';
 import HeaderImage from '../components/HeaderImage';
+import {HEADER_IMAGE_HEIGHT} from './../components/HeaderImage';
 
 const ProfileScreen = () => {
   const renderList = () => {
@@ -19,16 +20,11 @@ const ProfileScreen = () => {
   return (
     <HeaderScrollView
       header={<HeaderImage title={'테스트'} />}
-      headerMinHeight={200}
+      headerHeight={HEADER_IMAGE_HEIGHT}
+      headerMinHeight={0}
       onScroll={() => {}}>
       {renderList()}
     </HeaderScrollView>
   );
 };
 export default ProfileScreen;
-
-const Container = styled(View)`
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-`;
