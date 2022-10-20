@@ -1,12 +1,13 @@
 import React, {FunctionComponent} from 'react';
 import {Text, View, Image} from 'react-native';
 import styled from 'styled-components';
-import ViewDimension from './../lib/ViewDimention';
+import useDimension from './../hooks/useDimension';
 
 const HeaderImage: FunctionComponent<Props> = props => {
   const {title} = props;
   const mainImage = require('./../static/title_bg_image_apt.png');
-  const imageHeight = ViewDimension.get().width * 0.833;
+  const {windowWidth} = useDimension();
+  const imageHeight = windowWidth * 0.833;
 
   return (
     <Container>

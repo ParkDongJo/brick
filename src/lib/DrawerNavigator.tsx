@@ -1,6 +1,6 @@
 import React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import StackNavigator from './../lib/StackNavigator';
+import TodosStackScreens from './TodosStackScreens';
 import SettingScreen from './../pages/SettingScreen';
 
 const Drawer = createDrawerNavigator<DrawerParamList>();
@@ -10,7 +10,7 @@ const DrawerNavigator = () => {
     <Drawer.Navigator initialRouteName="Main">
       <Drawer.Screen
         name="Main"
-        component={StackNavigator}
+        component={TodosStackScreens}
         options={{drawerLabel: 'MAIN'}}
       />
       <Drawer.Screen
@@ -26,5 +26,4 @@ export default DrawerNavigator;
 export type DrawerParamList = {
   Main: undefined;
   Setting: undefined;
-  About: undefined;
 };

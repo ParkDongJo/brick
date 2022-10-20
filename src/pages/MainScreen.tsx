@@ -1,4 +1,4 @@
-import React, {useLayoutEffect} from 'react';
+import React, {useRef, useLayoutEffect} from 'react';
 import {View, Text, Button} from 'react-native';
 import styled from 'styled-components';
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
