@@ -1,7 +1,6 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import ProfileScreen from '../pages/ProfileScreen';
-import DrawerNavigator from './../lib/DrawerNavigator';
 
 const Stack = createNativeStackNavigator<UsersStackScreensParamList>();
 
