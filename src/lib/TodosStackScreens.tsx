@@ -17,5 +17,5 @@ export default TodosStackScreens;
 
 export type TodosStackScreensParamList = {
   Main: undefined;
-  Detail: undefined;
+  Detail: {screenId: 1};
 };

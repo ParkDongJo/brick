@@ -20,10 +20,4 @@ describe('App render', () => {
     const title = screen.getByText('Move to Detail');
     expect(title).toBeTruthy();
   });
-
-  it('should render title Move to Profile', () => {
-    const screen = render(renderApp(props));
-    const title = screen.getByText('Move to Profile');
-    expect(title).toBeTruthy();
-  });
 });

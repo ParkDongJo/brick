@@ -1,7 +1,6 @@
 import React, {useRef} from 'react';
 import {
   Animated,
-  View,
   StyleSheet,
   NativeSyntheticEvent,
   NativeScrollEvent,

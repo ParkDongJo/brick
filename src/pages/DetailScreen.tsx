@@ -9,8 +9,8 @@ const DetailScreen = () => {
     const views = [];
     for (let i = 0; i < 100; i++) {
       views.push(
-        <View style={{backgroundColor: 'white'}}>
-          <Text>{'테스트'}</Text>
+        <View key={i} style={{backgroundColor: 'white'}}>
+          <Text>{'ITEM'}</Text>
         </View>,
       );
     }
@@ -18,7 +18,7 @@ const DetailScreen = () => {
   };
   return (
     <HeaderScrollView
-      header={<HeaderImage title={'테스트'} />}
+      header={<HeaderImage title={'TEST'} />}
       headerHeight={HEADER_IMAGE_HEIGHT}
       headerMinHeight={0}
       onScroll={() => {}}>
