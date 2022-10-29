@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1007017194525",
+    "project_id": "your-care-8ba48",
+    "storage_bucket": "your-care-8ba48.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1007017194525:android:81d2eed025df75682a02f4",
+        "android_client_info": {
+          "package_name": "com.brick.your_care"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1007017194525-voe69dkfbaqecb9n34r8oj5c885uv0lg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhOYApV3UaU0jGy4LMAeOORnTwdxS9KBI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1007017194525-voe69dkfbaqecb9n34r8oj5c885uv0lg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
