@@ -1,6 +1,8 @@
 import 'react-native';
 import React from 'react';
-import {render} from '@testing-library/react-native';
+import {render, waitForElementToBeRemoved} from '@testing-library/react-native';
+import {waitFor} from '@testing-library/react';
+import {act} from 'react-dom/test-utils';
 import MainScreen, {Props} from './MainScreen';
 
 const createTestProps = (props: Object) => ({
@@ -35,18 +37,22 @@ describe('MainScreen render', () => {
 
   beforeEach(() => {
     props = createTestProps({});
-    jest.useFakeTimers();
+    // jest.useFakeTimers();
   });
 
-  it('should render title Main Screen', () => {
+  it('should render title Main Screen', async () => {
     const screen = render(renderMainScreen(props));
     const title = screen.getByText('Main Screen');
-    expect(title).toBeTruthy();
+    await waitFor(async () => {
+      expect(title).not.toBeNull();
+    });
   });
 
-  it('should render title Move to Detail', () => {
+  it('should render title Move to Detail', async () => {
     const screen = render(renderMainScreen(props));
     const title = screen.getByText('Move to Detail');
-    expect(title).toBeTruthy();
+    await waitFor(async () => {
+      expect(title).toBeTruthy();
+    });
   });
 });
