@@ -1,8 +1,7 @@
 import 'react-native';
 import React from 'react';
-import {render, waitForElementToBeRemoved} from '@testing-library/react-native';
+import {render} from '@testing-library/react-native';
 import {waitFor} from '@testing-library/react';
-import {act} from 'react-dom/test-utils';
 import MainScreen, {Props} from './MainScreen';
 
 const createTestProps = (props: Object) => ({

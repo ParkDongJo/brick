@@ -1,6 +1,6 @@
 import 'react-native';
 import React from 'react';
-import {render} from '@testing-library/react-native';
+import {render, waitFor} from '@testing-library/react-native';
 
 import App, {Props} from './App';
 
@@ -15,9 +15,11 @@ describe('App render', () => {
     jest.useFakeTimers();
   });
 
-  it('should render title Move to Detail', () => {
+  it('should render title Move to Detail', async () => {
     const screen = render(renderApp(props));
     const title = screen.getByText('Move to Detail');
-    expect(title).toBeTruthy();
+    await waitFor(async () => {
+      expect(title).toBeTruthy();
+    });
   });
 });
