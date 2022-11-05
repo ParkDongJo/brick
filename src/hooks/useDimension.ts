@@ -7,11 +7,11 @@ const useDimention = () => {
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
 
-  const isLargeScreen = (): boolean => {
-    return Dimensions.get().width >= STANDARD_LARGE_SCREEN_WIDTH;
+  const isLargeScreen = (dim: Dim = 'window'): boolean => {
+    return Dimensions.get(dim).width >= STANDARD_LARGE_SCREEN_WIDTH;
   };
-  const isFoldFrontScreen = (): boolean => {
-    return Dimensions.get().width <= FOLD_FRONT_SCREEN_WIDTH;
+  const isFoldFrontScreen = (dim: Dim = 'window'): boolean => {
+    return Dimensions.get(dim).width <= FOLD_FRONT_SCREEN_WIDTH;
   };
   return {
     windowWidth,
@@ -21,3 +21,5 @@ const useDimention = () => {
   };
 };
 export default useDimention;
+
+type Dim = 'window' | 'screen';
