@@ -4,9 +4,7 @@ import styled from 'styled-components';
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {TodosStackScreensParamList} from '../lib/TodosStackScreens';
 import LogoTitle from './../components/LogoTitle';
-import AlertModal, {
-  Handle as ModalHandle,
-} from '../components/modals/AlertModal';
+import AlertModal, {Handle as ModalHandle} from '../components/AlertModal';
 import useFirebase from './../hooks/useFirebase';
 
 const MainScreen: React.FC<Props> = ({navigation}) => {
