@@ -15,7 +15,6 @@ const firestore = jest.fn(() => ({
         }),
       ),
       delete: jest.fn(() => {
-        console.log('dongjo delte');
         return Promise.resolve({
           status: 200,
         });
@@ -44,7 +43,6 @@ const firestore = jest.fn(() => ({
       }),
     ),
     delete: jest.fn(() => {
-      console.log('dongjo delte');
       return Promise.resolve({
         status: 200,
       });

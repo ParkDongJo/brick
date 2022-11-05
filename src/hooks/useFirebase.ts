@@ -33,7 +33,6 @@ const useFirebase = () => {
       }
       return docSnapshot.data() || {};
     } catch (err) {
-      console.log('test');
       return null;
     }
   };
