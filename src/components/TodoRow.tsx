@@ -10,7 +10,7 @@ const Todo: React.FC<Props> = ({title, onPress}) => {
     onPress();
   };
   return (
-    <Container>
+    <Container accessible={true} accessibilityLabel={'listitem'}>
       <TouchableOpacity
         testID={TestIds.TODOROW_CLICK_ROW}
         onPress={handleClick}>
