@@ -1,13 +1,18 @@
 import React from 'react';
-import {Text, Linking} from 'react-native';
+import {Text, SafeAreaView} from 'react-native';
+import {RecoilRoot} from 'recoil';
 import {NavigationContainer} from '@react-navigation/native';
 import TabNavigator from './lib/TabNavigator';
 
 const App: React.FC<Props> = () => {
   return (
-    <NavigationContainer fallback={<Text>Loading...</Text>}>
-      <TabNavigator />
-    </NavigationContainer>
+    <RecoilRoot>
+      <SafeAreaView>
+        <NavigationContainer fallback={<Text>Loading...</Text>}>
+          <TabNavigator />
+        </NavigationContainer>
+      </SafeAreaView>
+    </RecoilRoot>
   );
 };
 export default App;
