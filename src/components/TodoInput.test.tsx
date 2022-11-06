@@ -28,6 +28,8 @@ describe('TodoInput', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     Date.now = () => today;
+    (moment().format as jest.Mock).mockReturnValue(today);
+    (moment().add as jest.Mock).mockReturnValue(today + 5);
   });
 
   afterAll(() => {
@@ -59,8 +61,6 @@ describe('TodoInput', () => {
   });
 
   it('when add task', () => {
-    (moment().format as jest.Mock).mockReturnValue(today);
-    (moment().add as jest.Mock).mockReturnValue(20110101 + 5);
     const screen = renderTodoInput();
     const button = screen.getByText('추가하기');
     fireEvent.press(button);
