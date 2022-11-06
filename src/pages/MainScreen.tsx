@@ -1,17 +1,20 @@
 import React, {useState, useRef, useLayoutEffect, useEffect} from 'react';
 import {View, Text, Button} from 'react-native';
+import {useRecoilState} from 'recoil';
 import styled from 'styled-components';
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {todosState, Todo} from '../store/atoms/todos';
 import {TodosStackScreensParamList} from '../lib/TodosStackScreens';
 import LogoTitle from './../components/LogoTitle';
 import AlertModal, {Handle as ModalHandle} from '../components/AlertModal';
 import useFirebase from './../hooks/useFirebase';
+import TodoList from './../components/TodoList';
+import TodoInput from '../components/TodoInput';
 
 const MainScreen: React.FC<Props> = ({navigation}) => {
-  const [todos, setTodos] = useState([]);
-
   const modalRef = useRef<ModalHandle>(null);
-  const {fetch} = useFirebase();
+  const {fetchAll} = useFirebase();
+  const [todos, setTodos] = useRecoilState<Todo[]>(todosState);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -24,8 +27,8 @@ const MainScreen: React.FC<Props> = ({navigation}) => {
 
   useEffect(() => {
     const init = async () => {
-      const _todos = await fetch('todos');
-      setTodos(_todos);
+      const _todos = (await fetchAll('todos')) as Todo[];
+      setTodos([...todos, ..._todos]);
     };
     init();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -34,14 +37,8 @@ const MainScreen: React.FC<Props> = ({navigation}) => {
   return (
     <Container>
       <Text>Main Screen</Text>
-      {todos &&
-        todos.map(todo => {
-          return (
-            <View key={todo.id}>
-              <Text>{todo.title}</Text>
-            </View>
-          );
-        })}
+      <TodoInput addTaskCallback={() => {}} />
+      <TodoList todos={todos} />
       <Button
         title={'Move to Detail'}
         onPress={() => navigation.navigate('Detail', {screenId: 1})}

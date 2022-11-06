@@ -2,7 +2,10 @@ import 'react-native';
 import React from 'react';
 import {render} from '@testing-library/react-native';
 import {waitFor} from '@testing-library/react';
+import {RecoilRoot} from 'recoil';
 import MainScreen, {Props} from './MainScreen';
+import RecoilObserver from './../store/RecoilObserver';
+import {todosState} from './../store/atoms/todos';
 
 const createTestProps = (props: Object) => ({
   navigation: {
@@ -29,9 +32,19 @@ const createTestProps = (props: Object) => ({
 
 describe('MainScreen render', () => {
   let props = {};
+  const mockSetTodosFn = jest.fn();
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
 
   function renderMainScreen(temprops: Props) {
-    return <MainScreen {...temprops} />;
+    return (
+      <RecoilRoot>
+        <RecoilObserver node={todosState} mockFn={mockSetTodosFn} />
+        <MainScreen {...temprops} />
+      </RecoilRoot>
+    );
   }
 
   beforeEach(() => {
@@ -52,6 +65,14 @@ describe('MainScreen render', () => {
     const title = screen.getByText('Move to Detail');
     await waitFor(async () => {
       expect(title).toBeTruthy();
+    });
+  });
+
+  it('At the time of the first mount', async () => {
+    render(renderMainScreen(props));
+    await waitFor(async () => {
+      expect(mockSetTodosFn).toHaveBeenCalledTimes(2);
+      expect(mockSetTodosFn).toHaveBeenCalledWith([]);
     });
   });
 });

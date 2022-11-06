@@ -6,15 +6,17 @@ import {
   screen,
   waitFor,
 } from '@testing-library/react-native';
-
+import {RecoilRoot} from 'recoil';
 import TabNavigator from './TabNavigator';
 
 describe('TabNavigator', () => {
   function renderApp() {
     return (
-      <NavigationContainer>
-        <TabNavigator />
-      </NavigationContainer>
+      <RecoilRoot>
+        <NavigationContainer>
+          <TabNavigator />
+        </NavigationContainer>
+      </RecoilRoot>
     );
   }
   test('should render title ', async () => {
@@ -26,11 +28,7 @@ describe('TabNavigator', () => {
   });
 
   test('when click on button, move to detail page', async () => {
-    render(
-      <NavigationContainer>
-        <TabNavigator />
-      </NavigationContainer>,
-    );
+    render(renderApp());
     const buttonText = screen.getByText('Move to Detail');
     fireEvent.press(buttonText);
 
