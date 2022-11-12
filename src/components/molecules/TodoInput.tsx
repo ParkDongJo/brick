@@ -1,30 +1,34 @@
 import React, {useState} from 'react';
 import {View} from 'react-native';
-import {useRecoilState} from 'recoil';
-import {todosState, Todo} from './../store/atoms/todos';
+import {useQueryClient} from '@tanstack/react-query';
+import useTodo from '../../hooks/useTodo';
 import styled from 'styled-components';
 import moment from 'moment';
-import BasicButton from './common/BasicButton';
-import BasicInput from './common/BasicInput';
+import BasicButton from '../atoms/BasicButton';
+import BasicInput from '../atoms/BasicInput';
 
 const TodoInput: React.FC<Props> = props => {
+  const queryClient = useQueryClient();
   const {addTaskCallback} = props;
-  const [todos, setTodos] = useRecoilState(todosState);
   const [task, setTask] = useState('');
+  const {useMutaionTodo} = useTodo();
+  const mutation = useMutaionTodo(queryClient);
 
-  const addTask = (newTaask: string) => {
+  const addTask = (newTask: string) => {
     //
-
     const newTodo = {
       id: 'xxx',
       userId: 'test',
-      title: newTaask,
+      title: newTask,
       isDone: false,
       isChecked: false,
       createdAt: moment().format(),
       deadlineAt: moment().add(5, 'days'),
     } as unknown as Todo;
-    setTodos([newTodo, ...todos]);
+    mutation.mutate({
+      collection: 'todos',
+      doc: newTodo,
+    });
   };
   const onPressAddTaskButton = () => {
     addTask(task);
