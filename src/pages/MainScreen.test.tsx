@@ -2,10 +2,13 @@ import 'react-native';
 import React from 'react';
 import {render} from '@testing-library/react-native';
 import {waitFor} from '@testing-library/react';
+jest.mock('@tanstack/react-query');
+import {useQuery} from '@tanstack/react-query';
 import {RecoilRoot} from 'recoil';
 import MainScreen, {Props} from './MainScreen';
 import RecoilObserver from './../store/RecoilObserver';
 import {todosState} from './../store/atoms/todos';
+import todos from './../../fixtures/todos';
 
 const createTestProps = (props: Object) => ({
   navigation: {
@@ -36,6 +39,11 @@ describe('MainScreen render', () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
+    useQuery.mockReturnValue({
+      data: todos,
+      isLoading: false,
+      error: {},
+    });
   });
 
   function renderMainScreen(temprops: Props) {
@@ -49,7 +57,7 @@ describe('MainScreen render', () => {
 
   beforeEach(() => {
     props = createTestProps({});
-    // jest.useFakeTimers();
+    jest.useFakeTimers();
   });
 
   it('should render title Main Screen', async () => {
@@ -68,11 +76,21 @@ describe('MainScreen render', () => {
     });
   });
 
-  it('At the time of the first mount', async () => {
-    render(renderMainScreen(props));
+  it('should render list', async () => {
+    const screen = render(renderMainScreen(props));
+    const title1 = screen.getByText('새벽 기상하기');
+    const title2 = screen.getByText('새벽 공부하기');
     await waitFor(async () => {
-      expect(mockSetTodosFn).toHaveBeenCalledTimes(2);
-      expect(mockSetTodosFn).toHaveBeenCalledWith([]);
+      expect(title1).toBeTruthy();
+      expect(title2).toBeTruthy();
     });
   });
+
+  // it('At the time of the first mount', async () => {
+  //   render(renderMainScreen(props));
+  //   await waitFor(async () => {
+  //     expect(mockSetTodosFn).toHaveBeenCalledTimes(2);
+  //     expect(mockSetTodosFn).toHaveBeenCalledWith([]);
+  //   });
+  // });
 });
