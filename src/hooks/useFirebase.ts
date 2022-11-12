@@ -1,15 +1,19 @@
 import firestore, {
   FirebaseFirestoreTypes,
 } from '@react-native-firebase/firestore';
+import {Todo} from '../store/atoms/todos';
 
 export type FirestoreDocumentData =
   FirebaseFirestoreTypes.QuerySnapshot<FirebaseFirestoreTypes.DocumentData>;
 
 const useFirebase = () => {
-  const fetchAll = async (collection: string) => {
+  const fetchAll = async (collection: string): Promise<Todo[]> => {
     try {
       const snapshot = await firestore().collection(collection).get();
-      return snapshot.docs.map(data => ({id: data.id, ...data.data()}));
+      return snapshot.docs.map(data => ({
+        id: data.id,
+        ...data.data(),
+      })) as Todo[];
     } catch (err) {
       return [];
     }
