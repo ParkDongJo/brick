@@ -1,42 +1,30 @@
 import React from 'react';
 import {Text, SafeAreaView} from 'react-native';
 import {RecoilRoot} from 'recoil';
+import styled from 'styled-components';
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import {NavigationContainer} from '@react-navigation/native';
 import TabNavigator from './lib/TabNavigator';
 
+const queryClient = new QueryClient();
+
 const App: React.FC<Props> = () => {
   return (
-    <RecoilRoot>
-      <SafeAreaView>
+    <Container>
+      <RecoilRoot>
         <NavigationContainer fallback={<Text>Loading...</Text>}>
-          <TabNavigator />
+          <QueryClientProvider client={queryClient}>
+            <TabNavigator />
+          </QueryClientProvider>
         </NavigationContainer>
-      </SafeAreaView>
-    </RecoilRoot>
+      </RecoilRoot>
+    </Container>
   );
 };
 export default App;
 
 export type Props = {};
 
-// const linking = {
-//   prefixes: ['mbrick://', 'https://www.mbrick.com'],
-//   async getInitialURL() {
-//     const url = await Linking.getInitialURL();
-//     return url ? url : null;
-//   },
-//   subscribe(listener: (url: string) => void) {
-//     const linkingSubscription = Linking.addEventListener('url', ({url}) => {
-//       listener(url);
-//     });
-//     return () => {
-//       linkingSubscription.remove();
-//     };
-//   },
-//   config: {
-//     screens: {
-//       Index: 'main',
-//       Special: 'special',
-//     },
-//   },
-// };
+const Container = styled(SafeAreaView)`
+  flex: 1;
+`;

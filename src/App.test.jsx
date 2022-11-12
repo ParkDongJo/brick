@@ -2,7 +2,7 @@ import 'react-native';
 import React from 'react';
 import {render, waitFor} from '@testing-library/react-native';
 
-import App, {Props} from './App';
+import App from './App';
 
 describe('App render', () => {
   const props = {};
