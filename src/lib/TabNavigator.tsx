@@ -16,6 +16,6 @@ const TabNavigator = () => {
 export default TabNavigator;
 
 export type TabStackParamList = {
-  Index: undefined;
-  Profile: undefined;
+  Todos: undefined;
+  Users: undefined;
 };

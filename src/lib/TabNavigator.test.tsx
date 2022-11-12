@@ -6,10 +6,21 @@ import {
   screen,
   waitFor,
 } from '@testing-library/react-native';
+import {useQuery} from '@tanstack/react-query';
 import {RecoilRoot} from 'recoil';
+jest.mock('@tanstack/react-query');
 import TabNavigator from './TabNavigator';
 
 describe('TabNavigator', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+    useQuery.mockReturnValue({
+      data: [],
+      isLoading: false,
+      error: {},
+    });
+  });
+
   function renderApp() {
     return (
       <RecoilRoot>
