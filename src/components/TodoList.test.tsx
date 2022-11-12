@@ -1,6 +1,8 @@
 import React from 'react';
+import moment from 'moment';
 import {render, within} from '@testing-library/react-native';
-import TodoList, {Todo} from './TodoList';
+import TodoList from './TodoList';
+import {Todo} from '../store/atoms/todos';
 
 describe('TodoList', () => {
   function renderTodoList(todos: Todo[]) {
@@ -8,28 +10,33 @@ describe('TodoList', () => {
   }
 
   it('when render todos', () => {
-    const screen = renderTodoList([
+    const todos = [
       {
         userId: 'xxx',
         title: '새벽 기상하기',
         isDone: true,
         isChecked: true,
-        createdAt: new Date(),
-        deadlineAt: new Date(),
+        createdAt: moment(),
+        deadlineAt: moment(),
       },
       {
         userId: 'xxx',
         title: '새벽 공부하기',
         isDone: true,
         isChecked: true,
-        createdAt: new Date(),
-        deadlineAt: new Date(),
+        createdAt: moment(),
+        deadlineAt: moment(),
       },
-    ] as Todo[]);
-
-    const list = screen.getByRole('list');
+    ] as Todo[];
+    const {getByRole, rerender} = renderTodoList(todos);
+    const list = getByRole('list');
     const {getAllByLabelText} = within(list);
+
     expect(getAllByLabelText('listitem')).toHaveLength(2);
+
+    rerender(<TodoList todos={[todos[0]]} />);
+
+    expect(getAllByLabelText('listitem')).toHaveLength(1);
   });
 
   it('when todos is empty', () => {
