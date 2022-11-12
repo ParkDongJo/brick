@@ -29,6 +29,12 @@ const firestore = jest.fn(() => ({
               return {title: 'test'};
             },
           },
+          {
+            id: 2,
+            data: () => {
+              return {title: 'test2'};
+            },
+          },
         ],
       }),
     ),
