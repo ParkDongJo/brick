@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 import {View} from 'react-native';
-import {useQueryClient} from '@tanstack/react-query';
+import {useQueryClient, MutationFunction} from '@tanstack/react-query';
+import {createOne} from '../../lib/Firebase';
 import useTodo from '../../hooks/useTodo';
+import {Todo} from './../../store/atoms/todos';
 import styled from 'styled-components';
 import moment from 'moment';
 import BasicButton from '../atoms/BasicButton';
@@ -12,22 +14,20 @@ const TodoInput: React.FC<Props> = props => {
   const {addTaskCallback} = props;
   const [task, setTask] = useState('');
   const {useMutaionTodo} = useTodo();
-  const mutation = useMutaionTodo(queryClient);
+  const mutation = useMutaionTodo(queryClient, createOne as MutationFunction);
 
   const addTask = (newTask: string) => {
-    //
-    const newTodo = {
-      id: 'xxx',
-      userId: 'test',
-      title: newTask,
-      isDone: false,
-      isChecked: false,
-      createdAt: moment().format(),
-      deadlineAt: moment().add(5, 'days'),
-    } as unknown as Todo;
     mutation.mutate({
       collection: 'todos',
-      doc: newTodo,
+      doc: {
+        id: 'xxx',
+        userId: 'test',
+        title: newTask,
+        isDone: false,
+        isChecked: false,
+        createdAt: moment().format(),
+        deadlineAt: moment().add(5, 'days'),
+      } as unknown as Todo,
     });
   };
   const onPressAddTaskButton = () => {

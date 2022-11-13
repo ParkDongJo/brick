@@ -55,7 +55,7 @@ export const createOne = async ({
   }
 };
 
-export const update = async ({
+export const updateOne = async ({
   collection,
   docId,
   data,
@@ -75,7 +75,7 @@ export const update = async ({
   }
 };
 
-export const remove = async ({
+export const removeOne = async ({
   collection,
   docId,
 }: {

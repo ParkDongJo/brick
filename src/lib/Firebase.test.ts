@@ -1,4 +1,5 @@
-import {fetchAll, fetchOne, createOne, update, remove} from './Firebase';
+import moment from 'moment';
+import {fetchAll, fetchOne, createOne, updateOne, removeOne} from './Firebase';
 jest.mock('@react-native-firebase/firestore');
 
 describe('useFirebase', () => {
@@ -24,8 +25,8 @@ describe('useFirebase', () => {
         title: 'xx',
         isDone: true,
         isChecked: true,
-        createdAt: new Date(),
-        deadlineAt: new Date(),
+        createdAt: moment(),
+        deadlineAt: moment(),
       },
     });
     expect(resp).not.toBeNull();
@@ -33,7 +34,7 @@ describe('useFirebase', () => {
   });
 
   test('update firestore', async () => {
-    const resp = await update({
+    const resp = await updateOne({
       collection: 'todos',
       docId: 'xxx',
       data: {
@@ -45,7 +46,7 @@ describe('useFirebase', () => {
   });
 
   test('remove firestore', async () => {
-    const resp = await remove({
+    const resp = await removeOne({
       collection: 'todos',
       docId: 'xxx',
     });

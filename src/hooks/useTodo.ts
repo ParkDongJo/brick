@@ -1,6 +1,11 @@
-import {useQuery, useMutation} from '@tanstack/react-query';
+import {
+  useQuery,
+  useMutation,
+  QueryClient,
+  MutationFunction,
+} from '@tanstack/react-query';
 import {Todo} from '../store/atoms/todos';
-import {fetchAll, createOne} from '../lib/Firebase';
+import {fetchAll, createOne, updateOne, removeOne} from '../lib/Firebase';
 
 const useTodo = () => {
   return {
@@ -8,9 +13,9 @@ const useTodo = () => {
       useQuery<Todo[]>(['todos'], {
         queryFn: () => fetchAll('todos'),
       }),
-    useMutaionTodo: queryClient =>
+    useMutaionTodo: (queryClient: QueryClient, fn: MutationFunction) =>
       useMutation({
-        mutationFn: createOne,
+        mutationFn: fn,
         onSuccess: () => {
           // Invalidate and refetch
           queryClient.invalidateQueries({queryKey: ['todos']});
@@ -19,3 +24,5 @@ const useTodo = () => {
   };
 };
 export default useTodo;
+
+type MutationFn = typeof createOne | typeof updateOne | typeof removeOne;
