@@ -1,8 +1,8 @@
 import React from 'react';
 import {View, Text} from 'react-native';
-import HeaderScrollView from '../components/HeaderScrollView';
-import HeaderImage from '../components/HeaderImage';
-import {HEADER_IMAGE_HEIGHT} from './../components/HeaderImage';
+import HeaderScrollView from '../../components/HeaderScrollView';
+import HeaderImage from '../../components/HeaderImage';
+import {HEADER_IMAGE_HEIGHT} from '../../components/HeaderImage';
 
 const ProfileScreen = () => {
   const renderList = () => {

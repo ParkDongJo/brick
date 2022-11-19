@@ -5,10 +5,10 @@ import {waitFor} from '@testing-library/react';
 jest.mock('@tanstack/react-query');
 import {useQuery} from '@tanstack/react-query';
 import {RecoilRoot} from 'recoil';
-import MainScreen, {Props} from './MainScreen';
-import RecoilObserver from './../store/RecoilObserver';
-import {todosState} from './../store/atoms/todos';
-import todos from './../../fixtures/todos';
+import MainScreen, {Props} from './TodosScreen';
+import RecoilObserver from '../../store/RecoilObserver';
+import {todosState} from '../../store/atoms/todos';
+import todos from '../../../fixtures/todos';
 
 const createTestProps = (props: Object) => ({
   navigation: {
@@ -33,7 +33,7 @@ const createTestProps = (props: Object) => ({
   ...props,
 });
 
-describe('MainScreen render', () => {
+describe('TodosScreen render', () => {
   let props = {};
   const mockSetTodosFn = jest.fn();
 

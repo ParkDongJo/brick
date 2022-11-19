@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import styled from 'styled-components';
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {UsersStackScreensParamList} from '../lib/UsersStackScreens';
+import {UsersStackScreensParamList} from '../../lib/UsersStackScreens';
 
 const UsersScreen: React.FC<Props> = () => {
   return (

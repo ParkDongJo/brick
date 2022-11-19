@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 import styled from 'styled-components';
-import useDeviceInfo from './../hooks/useDeviceInfo';
+import useDeviceInfo from '../../hooks/useDeviceInfo';
 
 const SettingScreen = () => {
   const {
