@@ -17,7 +17,7 @@ describe('App render', () => {
 
   it('should render title Move to Detail', async () => {
     const screen = render(renderApp(props));
-    const title = screen.getByText('Move to Detail');
+    const title = screen.queryByText('Move to Detail');
     await waitFor(async () => {
       expect(title).toBeTruthy();
     });

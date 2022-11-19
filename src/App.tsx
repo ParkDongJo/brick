@@ -4,7 +4,8 @@ import {RecoilRoot} from 'recoil';
 import styled from 'styled-components';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import {NavigationContainer} from '@react-navigation/native';
-import TabNavigator from './lib/TabNavigator';
+import MainStackScreens from './lib/MainStackScreens';
+import Toast from './components/atoms/Toast';
 
 const queryClient = new QueryClient();
 
@@ -14,7 +15,8 @@ const App: React.FC<Props> = () => {
       <RecoilRoot>
         <NavigationContainer fallback={<Text>Loading...</Text>}>
           <QueryClientProvider client={queryClient}>
-            <TabNavigator />
+            <MainStackScreens />
+            <Toast />
           </QueryClientProvider>
         </NavigationContainer>
       </RecoilRoot>
