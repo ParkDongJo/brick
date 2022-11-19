@@ -1,11 +1,7 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {
-  render,
-  fireEvent,
-  screen,
-  waitFor,
-} from '@testing-library/react-native';
+import {render, fireEvent, screen} from '@testing-library/react-native';
+import {waitFor} from '@testing-library/react';
 import {useQuery} from '@tanstack/react-query';
 import {RecoilRoot} from 'recoil';
 jest.mock('@tanstack/react-query');

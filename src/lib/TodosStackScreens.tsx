@@ -1,14 +1,14 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import MainScreen from '../pages/MainScreen';
-import DetailScreen from '../pages/DetailScreen';
+import TodosScreen from '../pages/todo/TodosScreen';
+import DetailScreen from '../pages/todo/DetailScreen';
 
 const Stack = createNativeStackNavigator<TodosStackScreensParamList>();
 
 const TodosStackScreens = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Main" component={MainScreen} />
+      <Stack.Screen name="Todos" component={TodosScreen} />
       <Stack.Screen name="Detail" component={DetailScreen} />
     </Stack.Navigator>
   );
@@ -16,6 +16,6 @@ const TodosStackScreens = () => {
 export default TodosStackScreens;
 
 export type TodosStackScreensParamList = {
-  Main: undefined;
+  Todos: undefined;
   Detail: {screenId: 1};
 };
