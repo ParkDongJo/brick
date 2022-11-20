@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {Suspense} from 'react';
 import {useSetRecoilState} from 'recoil';
-import {View} from 'react-native';
+import {View, ActivityIndicator} from 'react-native';
 import styled from 'styled-components';
 import {useNavigation} from '@react-navigation/native';
 import LoginForm, {FORM_TYPE} from './../../components/molecules/LoginForm';
@@ -15,6 +15,7 @@ const EmailLoginScreen: React.FC = () => {
   const {show: showToast} = useToast();
   const onSubmit = async ({email, password}) => {
     if (!email || !password) {
+      showToast('이메일과 비밀번호를 입력하세요.');
       return;
     }
     const resp: ResponseSignIn = await signInEmail(email, password);
@@ -22,12 +23,17 @@ const EmailLoginScreen: React.FC = () => {
       showToast(resp.msg);
       return;
     }
-    setToken(resp.data.getIdToken());
+
+    const token = await resp.data.getIdToken();
+    setToken(token);
+    navigation.navigate('Index');
   };
 
   return (
     <Container>
-      <LoginForm type={FORM_TYPE.email} handleSubmit={onSubmit} />
+      <Suspense fallback={<ActivityIndicator size="large" color="#0000ff" />}>
+        <LoginForm type={FORM_TYPE.email} handleSubmit={onSubmit} />
+      </Suspense>
     </Container>
   );
 };
