@@ -3,10 +3,10 @@ import {View, Text, Button} from 'react-native';
 import styled from 'styled-components';
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {TodosStackScreensParamList} from '../../lib/TodosStackScreens';
-import LogoTitle from '../../components/LogoTitle';
-import AlertModal, {Handle as ModalHandle} from '../../components/AlertModal';
+import LogoTitle from '../../components/atoms/LogoTitle';
+import AlertModal, {Handle as ModalHandle} from '../../components/atoms/AlertModal';
 import useTodo from '../../hooks/useTodo';
-import TodoList from '../../components/TodoList';
+import TodoList from '../../components/molecules/TodoList';
 import TodoInput from '../../components/molecules/TodoInput';
 
 const TodosScreen: React.FC<Props> = ({navigation}) => {
