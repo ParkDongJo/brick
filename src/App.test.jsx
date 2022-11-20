@@ -1,5 +1,6 @@
 import 'react-native';
 import React from 'react';
+jest.mock('@react-navigation/native-stack');
 import {render, waitFor} from '@testing-library/react-native';
 
 import App from './App';

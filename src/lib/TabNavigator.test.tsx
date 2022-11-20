@@ -1,4 +1,5 @@
 import * as React from 'react';
+jest.mock('@react-navigation/native-stack');
 import {NavigationContainer} from '@react-navigation/native';
 import {render, fireEvent, screen} from '@testing-library/react-native';
 import {waitFor} from '@testing-library/react';
