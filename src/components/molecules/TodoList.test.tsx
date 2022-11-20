@@ -3,9 +3,9 @@ import {fireEvent, render, within} from '@testing-library/react-native';
 jest.mock('@tanstack/react-query');
 import {useMutation} from '@tanstack/react-query';
 import TodoList from './TodoList';
-import {Todo} from '../store/atoms/todos';
-import todos from './../../fixtures/todos';
-import TestIds from '../lib/TestIds';
+import {Todo} from '../../store/atoms/todos';
+import todos from '../../../fixtures/todos';
+import TestIds from '../../lib/TestIds';
 
 describe('TodoList', () => {
   const mockMutate = jest.fn();

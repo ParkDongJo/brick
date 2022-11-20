@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import styled from 'styled-components';
-import TestIds from '../lib/TestIds';
+import TestIds from '../../lib/TestIds';
 
 const Todo: React.FC<Props> = ({title, onPressCheck, onPressDelete}) => {
   const [isChecked, setIsChecked] = useState(false);

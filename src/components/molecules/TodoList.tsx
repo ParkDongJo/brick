@@ -1,12 +1,13 @@
 import React from 'react';
 import {FlatList, Text} from 'react-native';
 import {useQueryClient, MutationFunction} from '@tanstack/react-query';
-import {updateOne, removeOne} from '../lib/Firebase';
-import TodoRow from './TodoRow';
-import {Todo} from '../store/atoms/todos';
-import useTodo from './../hooks/useTodo';
+import {updateOne, removeOne} from '../../lib/Firebase';
+import TodoRow from '../atoms/TodoRow';
+import {Todo} from '../../store/atoms/todos';
+import useTodo from '../../hooks/useTodo';
 
 const TodoList: React.FC<Props> = props => {
+  const {todos} = props;
   const queryClient = useQueryClient();
   const {useMutaionTodo} = useTodo();
   const updateMutation = useMutaionTodo(
@@ -18,7 +19,6 @@ const TodoList: React.FC<Props> = props => {
     removeOne as MutationFunction,
   );
 
-  const {todos} = props;
   const onClickItem = (todo: Todo) => {
     updateMutation.mutate({
       collection: 'todos',
@@ -26,7 +26,7 @@ const TodoList: React.FC<Props> = props => {
       data: {...todo, isChecked: true},
     });
   };
-  const onClickDeleteBtn = (todoId: number) => {
+  const onClickDeleteBtn = (todoId: string) => {
     removeMutation.mutate({
       collection: 'todos',
       docId: todoId,

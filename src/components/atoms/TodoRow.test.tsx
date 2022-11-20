@@ -1,6 +1,6 @@
 import {fireEvent, render} from '@testing-library/react-native';
 import TodoRow from './TodoRow';
-import TestIds from '../lib/TestIds';
+import TestIds from '../../lib/TestIds';
 
 describe('TodoRow', () => {
   const mockClickRowHandler = jest.fn();
