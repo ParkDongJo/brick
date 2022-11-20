@@ -14,7 +14,7 @@ const PhoneLoginScreen: React.FC = () => {
   };
   return (
     <Container>
-      <LoginForm type={FORM_TYPE.email} handleSubmit={onSubmit} />
+      <LoginForm type={FORM_TYPE.phone} handleSubmit={onSubmit} />
     </Container>
   );
 };
