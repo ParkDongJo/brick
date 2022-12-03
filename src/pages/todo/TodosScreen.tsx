@@ -4,7 +4,9 @@ import styled from 'styled-components';
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {TodosStackScreensParamList} from '../../lib/TodosStackScreens';
 import LogoTitle from '../../components/atoms/LogoTitle';
-import AlertModal, {Handle as ModalHandle} from '../../components/atoms/AlertModal';
+import AlertModal, {
+  Handle as ModalHandle,
+} from '../../components/atoms/AlertModal';
 import useTodo from '../../hooks/useTodo';
 import TodoList from '../../components/molecules/TodoList';
 import TodoInput from '../../components/molecules/TodoInput';

@@ -1,18 +1,21 @@
 import firestore, {
   FirebaseFirestoreTypes,
 } from '@react-native-firebase/firestore';
-import {Todo} from '../store/atoms/todos';
+import {Todo} from '../store/atoms/todo';
+import {User} from '../store/atoms/auth';
 
 export type FirestoreDocumentData =
   FirebaseFirestoreTypes.QuerySnapshot<FirebaseFirestoreTypes.DocumentData>;
 
-export const fetchAll = async (collection: string): Promise<Todo[]> => {
+export const fetchAll = async (
+  collection: string,
+): Promise<Todo[] | User[]> => {
   try {
     const snapshot = await firestore().collection(collection).get();
     return snapshot.docs.map(data => ({
       id: data.id,
       ...data.data(),
-    })) as Todo[];
+    })) as Todo[] | User[];
   } catch (err) {
     return [];
   }
@@ -88,13 +91,4 @@ export const removeOne = async ({
   } catch (err) {
     return null;
   }
-};
-
-type TodoDoc = {
-  userId: string;
-  title: string;
-  isDone: boolean;
-  isChecked: boolean;
-  createdAt: Date;
-  deadlineAt: Date;
 };

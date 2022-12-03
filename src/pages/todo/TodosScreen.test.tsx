@@ -50,7 +50,7 @@ describe('TodosScreen render', () => {
     return (
       <RecoilRoot>
         <RecoilObserver node={todosState} mockFn={mockSetTodosFn} />
-        <MainScreen {...temprops} />
+        <TodosScreen {...temprops} />
       </RecoilRoot>
     );
   }
