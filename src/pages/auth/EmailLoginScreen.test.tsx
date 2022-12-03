@@ -9,7 +9,7 @@ jest.mock('./../../hooks/useToast');
 jest.mock('./../../hooks/useAuth');
 import useToast from './../../hooks/useToast';
 import useAuth from './../../hooks/useAuth';
-import {tokenAtom} from './../../store/atoms/user';
+import {tokenAtom} from './../../store/atoms/auth';
 
 describe('EmailLogin', () => {
   const mockNavigate = jest.fn();

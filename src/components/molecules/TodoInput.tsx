@@ -3,7 +3,7 @@ import {View} from 'react-native';
 import {useQueryClient, MutationFunction} from '@tanstack/react-query';
 import {createOne} from '../../lib/Firebase';
 import useTodo from '../../hooks/useTodo';
-import {Todo} from './../../store/atoms/todos';
+import {Todo} from '../../store/atoms/todo';
 import styled from 'styled-components';
 import moment from 'moment';
 import BasicButton from '../atoms/BasicButton';

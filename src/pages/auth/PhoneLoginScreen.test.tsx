@@ -3,7 +3,7 @@ import {render} from '@testing-library/react-native';
 import {RecoilRoot} from 'recoil';
 import RecoilObserver from './../../store/RecoilObserver';
 import PhoneLoginScreen from './PhoneLoginScreen';
-import {tokenAtom} from './../../store/atoms/user';
+import {tokenAtom} from './../../store/atoms/auth';
 
 // ios 셋팅 필요함
 // android 셋팅 필요함

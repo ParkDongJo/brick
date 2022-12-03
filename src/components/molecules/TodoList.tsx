@@ -3,7 +3,7 @@ import {FlatList, Text} from 'react-native';
 import {useQueryClient, MutationFunction} from '@tanstack/react-query';
 import {updateOne, removeOne} from '../../lib/Firebase';
 import TodoRow from '../atoms/TodoRow';
-import {Todo} from '../../store/atoms/todos';
+import {Todo} from '../../store/atoms/todo';
 import useTodo from '../../hooks/useTodo';
 
 const TodoList: React.FC<Props> = props => {

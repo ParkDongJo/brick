@@ -4,7 +4,7 @@ import {
   QueryClient,
   MutationFunction,
 } from '@tanstack/react-query';
-import {Todo} from '../store/atoms/todos';
+import {Todo} from '../store/atoms/todo';
 import {fetchAll, createOne, updateOne, removeOne} from '../lib/Firebase';
 
 const useTodo = () => {

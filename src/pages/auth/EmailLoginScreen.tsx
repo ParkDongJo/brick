@@ -6,7 +6,7 @@ import {useNavigation} from '@react-navigation/native';
 import LoginForm, {FORM_TYPE} from './../../components/molecules/LoginForm';
 import useAuth, {ResponseSignIn} from './../../hooks/useAuth';
 import useToast from './../../hooks/useToast';
-import {tokenAtom} from './../../store/atoms/user';
+import {tokenAtom} from './../../store/atoms/auth';
 
 const EmailLoginScreen: React.FC = () => {
   const navigation = useNavigation();
