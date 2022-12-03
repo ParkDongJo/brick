@@ -1,18 +1,18 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import ProfileScreen from '../pages/my/ProfileScreen';
+import ReceiversScreen from '../pages/user/ReceiversScreen';
 
 const Stack = createNativeStackNavigator<UsersStackScreensParamList>();
 
 const UsersStackScreens = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Profile" component={ProfileScreen} />
+      <Stack.Screen name="Receivers" component={ReceiversScreen} />
     </Stack.Navigator>
   );
 };
 export default UsersStackScreens;
 
 export type UsersStackScreensParamList = {
-  Profile: undefined;
+  Receivers: undefined;
 };
