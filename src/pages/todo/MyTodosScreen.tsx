@@ -11,7 +11,7 @@ import useTodo from '../../hooks/useTodo';
 import TodoList from '../../components/molecules/TodoList';
 import TodoInput from '../../components/molecules/TodoInput';
 
-const TodosScreen: React.FC<Props> = ({navigation}) => {
+const MyTodosScreen: React.FC<Props> = ({navigation}) => {
   const modalRef = useRef<ModalHandle>(null);
   const {useQueryTodos} = useTodo();
   const {isLoading, data} = useQueryTodos();
@@ -35,7 +35,6 @@ const TodosScreen: React.FC<Props> = ({navigation}) => {
 
   return (
     <Container>
-      <Text>Main Screen</Text>
       <TodoInput addTaskCallback={() => {}} />
       <TodoList todos={data || []} />
       <Button
@@ -46,9 +45,9 @@ const TodosScreen: React.FC<Props> = ({navigation}) => {
     </Container>
   );
 };
-export default TodosScreen;
+export default MyTodosScreen;
 
-type Props = {} & NativeStackScreenProps<TodosStackScreensParamList, 'Todos'>;
+type Props = {} & NativeStackScreenProps<TodosStackScreensParamList, 'MyTodos'>;
 
 const Container = styled(View)`
   flex: 1;

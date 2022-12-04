@@ -5,7 +5,7 @@ import {waitFor} from '@testing-library/react';
 jest.mock('@tanstack/react-query');
 import {useQuery} from '@tanstack/react-query';
 import {RecoilRoot} from 'recoil';
-import TodosScreen, {Props} from './TodosScreen';
+import MyTodosScreen, {Props} from './MyTodosScreen';
 import RecoilObserver from '../../store/RecoilObserver';
 import {todosState} from '../../store/atoms/todo';
 import todos from '../../../fixtures/todos';
@@ -46,11 +46,11 @@ describe('TodosScreen render', () => {
     });
   });
 
-  function renderMainScreen(temprops: Props) {
+  function renderMyTodosScreen(temprops: Props) {
     return (
       <RecoilRoot>
         <RecoilObserver node={todosState} mockFn={mockSetTodosFn} />
-        <TodosScreen {...temprops} />
+        <MyTodosScreen {...temprops} />
       </RecoilRoot>
     );
   }
@@ -61,7 +61,7 @@ describe('TodosScreen render', () => {
   });
 
   it('should render title Main Screen', async () => {
-    const screen = render(renderMainScreen(props));
+    const screen = render(renderMyTodosScreen(props));
     const title = screen.getByText('Main Screen');
     await waitFor(async () => {
       expect(title).not.toBeNull();
@@ -69,7 +69,7 @@ describe('TodosScreen render', () => {
   });
 
   it('should render title Move to Detail', async () => {
-    const screen = render(renderMainScreen(props));
+    const screen = render(renderMyTodosScreen(props));
     const title = screen.getByText('Move to Detail');
     await waitFor(async () => {
       expect(title).toBeTruthy();
@@ -77,7 +77,7 @@ describe('TodosScreen render', () => {
   });
 
   it('should render list', async () => {
-    const screen = render(renderMainScreen(props));
+    const screen = render(renderMyTodosScreen(props));
     const title1 = screen.getByText('새벽 기상하기');
     const title2 = screen.getByText('새벽 공부하기');
     await waitFor(async () => {
