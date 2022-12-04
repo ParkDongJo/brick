@@ -29,20 +29,6 @@ describe('ReceiversScreen', () => {
     }));
   });
 
-  it('when render Screen', () => {
-    const {getAllByText, getByRole} = render(renderReceiversScreen(props));
-    const name = getAllByText('charles');
-    const comment = getAllByText('he is my freind');
-    const profileImg = getByRole('image');
-    const list = getByRole('list');
-    const {getAllByLabelText} = within(list);
-
-    expect(name).not.toBeNull();
-    expect(comment).not.toBeNull();
-    expect(profileImg.props.src).not.toBeNull();
-    expect(getAllByLabelText('listitem')).toHaveLength(2);
-  });
-
   it('when click item', async () => {
     const {getByRole} = render(renderReceiversScreen(props));
     const list = getByRole('list');
@@ -50,6 +36,6 @@ describe('ReceiversScreen', () => {
 
     fireEvent.press(getAllByLabelText('listitem')[0]);
 
-    expect(mockNavigate).toBeCalled();
+    expect(mockNavigate).toBeCalledWith('ReceiverTodos');
   });
 });
