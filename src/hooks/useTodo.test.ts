@@ -1,5 +1,4 @@
-import React from 'react';
-import {renderHook, waitFor} from '@testing-library/react';
+import {renderHook} from '@testing-library/react';
 import {useQuery} from '@tanstack/react-query';
 import useTodo from './useTodo';
 import todos from '../../fixtures/todos';
