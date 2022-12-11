@@ -5,18 +5,22 @@ import {
   MutationFunction,
 } from '@tanstack/react-query';
 import {Receiver} from '../store/atoms/receiver';
-import {fetchAll, createOne, updateOne, removeOne} from '../lib/Firebase';
+import {fetchOne, createOne, updateOne, removeOne} from '../lib/Firebase';
 
 export const USER_QUERY_KEY = {
   RECEIVERS: 'receivers',
 };
 
 const useUser = () => {
+  const getMe = () => ({userId: '111'});
   return {
-    useQueryUsers: (key: typeof USER_QUERY_KEY.RECEIVERS) =>
-      useQuery<Receiver[]>([key], {
-        queryFn: () => fetchAll(key) as Promise<Receiver[]>,
-      }),
+    useQueryReceivers: (key: typeof USER_QUERY_KEY.RECEIVERS) => {
+      const {userId} = getMe();
+      return useQuery<Receiver[]>([key], {
+        queryFn: () =>
+          fetchOne({collection: key, docId: userId}) as Promise<Receiver[]>,
+      });
+    },
     useMutaionUser: (queryClient: QueryClient, fn: MutationFunction) =>
       useMutation({
         mutationFn: fn,

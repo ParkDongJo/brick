@@ -1,11 +1,18 @@
 import React from 'react';
 import {renderHook, waitFor} from '@testing-library/react';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
-import useUser from './useUser';
+import {useQuery} from '@tanstack/react-query';
+import useUser, {USER_QUERY_KEY} from './useUser';
+import receivers from '../../fixtures/receivers';
 
 describe('useUser', () => {
   beforeEach(() => {
     jest.useFakeTimers();
+    useQuery.mockReturnValue({
+      data: receivers,
+      isLoading: false,
+      error: {},
+    });
   });
 
   const createWrapper = () => {
@@ -21,11 +28,14 @@ describe('useUser', () => {
     );
   };
 
-  it('When run useQueryUser', async () => {
-    const {useQueryUsers} = useUser();
-    const {result} = renderHook(() => useQueryUsers(), {
-      wrapper: createWrapper(),
-    });
+  it('When run useQueryReceivers', async () => {
+    const {useQueryReceivers} = useUser();
+    const {result} = renderHook(
+      () => useQueryReceivers(USER_QUERY_KEY.RECEIVERS),
+      {
+        wrapper: createWrapper(),
+      },
+    );
 
     await waitFor(() => expect(result.current.isSuccess).toBe(true));
 

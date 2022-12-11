@@ -7,15 +7,13 @@ import {Receiver} from '../store/atoms/receiver';
 export type FirestoreDocumentData =
   FirebaseFirestoreTypes.QuerySnapshot<FirebaseFirestoreTypes.DocumentData>;
 
-export const fetchAll = async (
-  collection: string,
-): Promise<Todo[] | Receiver[]> => {
+export const fetchAll = async (collection: string): Promise<any[]> => {
   try {
     const snapshot = await firestore().collection(collection).get();
     return snapshot.docs.map(data => ({
       id: data.id,
       ...data.data(),
-    })) as Todo[] | Receiver[];
+    })) as any[];
   } catch (err) {
     return [];
   }
