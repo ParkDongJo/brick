@@ -1,6 +1,7 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import ReceiversScreen from '../pages/user/ReceiversScreen';
+import {Todo} from '../store/atoms/todo';
 import ReceiverTodosScreen from '../pages/user/ReceiverTodosScreen';
 
 const Stack = createNativeStackNavigator<UsersStackScreensParamList>();
@@ -17,5 +18,5 @@ export default UsersStackScreens;
 
 export type UsersStackScreensParamList = {
   Receivers: undefined;
-  ReceiverTodos: undefined;
+  ReceiverTodos: {todos: Todo[]};
 };

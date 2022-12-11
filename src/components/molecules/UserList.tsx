@@ -5,8 +5,8 @@ import {Receiver} from '../../store/atoms/receiver';
 
 const UserList: React.FC<Props> = props => {
   const {datas, onClickItem} = props;
-  const handleClickItem = () => {
-    onClickItem();
+  const handleClickItem = (rowId: string) => {
+    onClickItem(rowId);
   };
 
   return (
@@ -24,7 +24,7 @@ const UserList: React.FC<Props> = props => {
               comment={item.comment}
               email={item.email}
               profileUrl={item.profileUrl}
-              onPress={handleClickItem}
+              onPress={() => handleClickItem(item.id)}
             />
           )}
         />
@@ -38,5 +38,5 @@ export default UserList;
 
 type Props = {
   datas: Receiver[];
-  onClickItem(): void;
+  onClickItem(id: string): void;
 };

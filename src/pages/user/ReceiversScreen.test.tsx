@@ -32,6 +32,8 @@ describe('ReceiversScreen', () => {
 
     fireEvent.press(getAllByLabelText('listitem')[0]);
 
-    expect(mockNavigate).toBeCalledWith('ReceiverTodos');
+    expect(mockNavigate).toBeCalledWith('ReceiverTodos', {
+      todos: receivers[0].todos,
+    });
   });
 });
