@@ -2,20 +2,20 @@ import firestore, {
   FirebaseFirestoreTypes,
 } from '@react-native-firebase/firestore';
 import {Todo} from '../store/atoms/todo';
-import {User} from '../store/atoms/auth';
+import {Receiver} from '../store/atoms/receiver';
 
 export type FirestoreDocumentData =
   FirebaseFirestoreTypes.QuerySnapshot<FirebaseFirestoreTypes.DocumentData>;
 
 export const fetchAll = async (
   collection: string,
-): Promise<Todo[] | User[]> => {
+): Promise<Todo[] | Receiver[]> => {
   try {
     const snapshot = await firestore().collection(collection).get();
     return snapshot.docs.map(data => ({
       id: data.id,
       ...data.data(),
-    })) as Todo[] | User[];
+    })) as Todo[] | Receiver[];
   } catch (err) {
     return [];
   }

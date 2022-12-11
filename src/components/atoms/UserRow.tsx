@@ -4,14 +4,16 @@ import styled from 'styled-components';
 import TestIds from '../../lib/TestIds';
 
 const UserRow: React.FC<Props> = props => {
-  const {name, comment, email, profileUrl, onPress} = props;
+  const {id, name, comment, email, profileUrl, onPress} = props;
   return (
     <Container accessible={true} accessibilityLabel={'listitem'}>
-      <TouchableOpacity testID={TestIds.USERROW_TOUCH_ROW} onPress={onPress}>
+      <TouchableOpacity
+        testID={`${TestIds.USERROW_TOUCH_ROW}-${id}`}
+        onPress={onPress}>
         <Text>{name}</Text>
         <Text>{comment}</Text>
         <Text>{email}</Text>
-        <ProfileImg source={require(profileUrl)} resizeMode="stretch" />
+        {/* <ProfileImg source={require(profileUrl)} resizeMode="stretch" /> */}
       </TouchableOpacity>
     </Container>
   );
@@ -19,6 +21,7 @@ const UserRow: React.FC<Props> = props => {
 export default UserRow;
 
 type Props = {
+  id: string;
   name: string;
   comment: string;
   email: string;

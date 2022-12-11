@@ -19,6 +19,7 @@ const UserList: React.FC<Props> = props => {
           keyExtractor={data => data.id}
           renderItem={({item}: {item: Receiver}) => (
             <UserRow
+              id={item.id}
               name={item.name}
               comment={item.comment}
               email={item.email}

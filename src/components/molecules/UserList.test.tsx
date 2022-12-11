@@ -15,15 +15,13 @@ describe('UserList', () => {
 
   it('when render list', () => {
     const {getAllByText, getByRole} = renderUserList({datas: receivers});
-    const name = getAllByText('charles');
-    const comment = getAllByText('he is my freind');
-    const profileImg = getByRole('image');
+    const name = getAllByText(receivers[0].name);
+    const comment = getAllByText(receivers[0].comment);
     const list = getByRole('list');
     const {getAllByLabelText} = within(list);
 
     expect(name).not.toBeNull();
     expect(comment).not.toBeNull();
-    expect(profileImg.props.src).not.toBeNull();
     expect(getAllByLabelText('listitem')).toHaveLength(2);
   });
 
@@ -34,7 +32,9 @@ describe('UserList', () => {
 
   it('when click list item', () => {
     const {getByTestId} = renderUserList({datas: receivers});
-    fireEvent.press(getByTestId(TestIds.USERROW_TOUCH_ROW));
+    fireEvent.press(
+      getByTestId(`${TestIds.USERROW_TOUCH_ROW}-${receivers[0].id}`),
+    );
 
     expect(mockClickItemFn).toBeCalled();
   });

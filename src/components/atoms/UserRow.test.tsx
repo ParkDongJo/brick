@@ -2,19 +2,22 @@ import React from 'react';
 import {fireEvent, render} from '@testing-library/react-native';
 import UserRow, {Props} from './UserRow';
 import TestIds from '../../lib/TestIds';
+import receivers from '../../../fixtures/receivers';
 
 describe('UserRow', () => {
   const mockClickRowFn = jest.fn();
-  const props = {
-    name: 'charles',
-    comment: 'my friend',
-    email: 'dongjo@gmail.com',
-    profileUrl: './xxx',
-  };
+  const props = receivers[0];
 
-  function renderUserRow({name, comment, email, profileUrl}: Partial<Props>) {
+  function renderUserRow({
+    id,
+    name,
+    comment,
+    email,
+    profileUrl,
+  }: Partial<Props>) {
     return render(
       <UserRow
+        id={id}
         name={name}
         comment={comment}
         email={email}
@@ -26,20 +29,18 @@ describe('UserRow', () => {
 
   it('when render row', () => {
     const {getByText} = renderUserRow(props);
-    const name = getByText('charles');
-    const comment = getByText('my friend');
-    const email = getByText('dongjo@gmail.com');
-    const profileUrl = getByText('./xxx');
+    const name = getByText(props.name);
+    const comment = getByText(props.comment);
+    const email = getByText(props.email);
 
     expect(name).not.toBeNull();
     expect(comment).not.toBeNull();
     expect(email).not.toBeNull();
-    expect(profileUrl).not.toBeNull();
   });
 
   it('when press the user row', () => {
     const {getByTestId} = renderUserRow(props);
-    fireEvent.press(getByTestId(TestIds.USERROW_TOUCH_ROW));
+    fireEvent.press(getByTestId(`${TestIds.USERROW_TOUCH_ROW}-${props.id}`));
 
     expect(mockClickRowFn).toBeCalled();
   });
