@@ -1,35 +1,24 @@
 import React from 'react';
-// import {renderHook} from '@testing-library/react-hooks';
-// import {renderHook} from '@testing-library/react-native';
 import {renderHook, waitFor} from '@testing-library/react';
-import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
+import {useQuery} from '@tanstack/react-query';
 import useTodo from './useTodo';
+import todos from '../../fixtures/todos';
+
+jest.mock('@tanstack/react-query');
 
 describe('useTodo', () => {
   beforeEach(() => {
     jest.useFakeTimers();
-  });
-
-  const createWrapper = () => {
-    const queryClient = new QueryClient({
-      defaultOptions: {
-        queries: {
-          retry: false,
-        },
-      },
+    useQuery.mockReturnValue({
+      data: todos,
+      isLoading: false,
+      error: {},
     });
-    return ({children}) => (
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    );
-  };
+  });
 
   it('When run useQueryTodo', async () => {
     const {useQueryTodos} = useTodo();
-    const {result} = renderHook(() => useQueryTodos(), {
-      wrapper: createWrapper(),
-    });
-
-    await waitFor(() => expect(result.current.isSuccess).toBe(true));
+    const {result} = renderHook(() => useQueryTodos());
 
     expect(result.current.data).toHaveLength(2);
   });

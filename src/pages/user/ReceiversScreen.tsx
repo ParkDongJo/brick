@@ -7,10 +7,10 @@ import useUser, {USER_QUERY_KEY} from '../../hooks/useUser';
 import UserList from '../../components/molecules/UserList';
 
 const ReceiversScreen: React.FC<Props> = ({navigation}) => {
-  const {useQueryUsers} = useUser();
-  const {isLoading, data} = useQueryUsers(USER_QUERY_KEY.RECEIVERS);
+  const {useQueryReceivers} = useUser();
+  const {isLoading, data} = useQueryReceivers(USER_QUERY_KEY.RECEIVERS);
   const moveToReceiverTodos = () => {
-    navigation.push('ReceiverTodos');
+    navigation.navigate('ReceiverTodos');
   };
   if (isLoading) {
     return (
