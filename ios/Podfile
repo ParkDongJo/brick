@@ -10,6 +10,9 @@ target 'yourcare' do
 
   pod 'GoogleUtilities', :modular_headers => true
   pod 'FirebaseCore', :modular_headers => true
+  pod 'KakaoSDKCommon'  # 필수 요소를 담은 공통 모듈
+  pod 'KakaoSDKAuth'  # 사용자 인증
+  pod 'KakaoSDKUser'  # 카카오 로그인, 사용자 관리
   # Flags change depending on the env values.
   flags = get_default_flags()
 
@@ -32,6 +35,7 @@ target 'yourcare' do
   target 'yourcareTests' do
     inherit! :complete
     # Pods for testing
+    permissions_path = '../node_modules/react-native-permissions/ios'
   end
 
   post_install do |installer|

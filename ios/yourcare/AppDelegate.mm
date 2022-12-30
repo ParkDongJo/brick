@@ -1,6 +1,7 @@
 #import <Firebase.h>
 #import <React/RCTLinkingManager.h>
 #import "AppDelegate.h"
+#import <RNKakaoLogins.h>
 
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
@@ -138,6 +139,9 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
    openURL:(NSURL *)url
    options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
 {
+  if([RNKakaoLogins isKakaoTalkLoginUrl:url]) {
+    return [RNKakaoLogins handleOpenUrl: url];
+  }
   return [RCTLinkingManager application:application openURL:url options:options];
 }
 
