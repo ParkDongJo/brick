@@ -5,7 +5,7 @@ platform :ios, '13.0'
 install! 'cocoapods', :deterministic_uuids => false
 
 
-target 'brick' do
+target 'yourcare' do
   config = use_native_modules!
 
   pod 'GoogleUtilities', :modular_headers => true
@@ -29,7 +29,7 @@ target 'brick' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
-  target 'brickTests' do
+  target 'yourcareTests' do
     inherit! :complete
     # Pods for testing
   end
