@@ -15,9 +15,7 @@ describe('LoginForm', () => {
     useToast.mockImplementation(() => ({show: mockShowToast}));
   });
   function renderLoginForm(formType = FORM_TYPE.email) {
-    return render(
-      <LoginForm type={formType} handleSubmit={mockHandleSubmit} />,
-    );
+    return render(<LoginForm type={formType} submit={mockHandleSubmit} />);
   }
 
   it('when redner screen', () => {
@@ -29,9 +27,7 @@ describe('LoginForm', () => {
     expect(getByPlaceholderText('비밀번호를 입력하세요.')).toBeTruthy();
     expect(getByText('인증하기')).toBeTruthy();
 
-    rerender(
-      <LoginForm type={FORM_TYPE.phone} handleSubmit={mockHandleSubmit} />,
-    );
+    rerender(<LoginForm type={FORM_TYPE.phone} submit={mockHandleSubmit} />);
 
     expect(getByPlaceholderText('전화번호를 입력하세요.')).toBeTruthy();
     expect(getByText('인증하기')).toBeTruthy();

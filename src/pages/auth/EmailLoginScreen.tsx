@@ -32,7 +32,7 @@ const EmailLoginScreen: React.FC = () => {
   return (
     <Container>
       <Suspense fallback={<ActivityIndicator size="large" color="#0000ff" />}>
-        <LoginForm type={FORM_TYPE.email} handleSubmit={onSubmit} />
+        <LoginForm type={FORM_TYPE.email} submit={onSubmit} />
       </Suspense>
     </Container>
   );

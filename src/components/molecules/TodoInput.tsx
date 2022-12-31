@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
-import {View} from 'react-native';
+import React from 'react';
+import {View, Text} from 'react-native';
 import {useQueryClient, MutationFunction} from '@tanstack/react-query';
+import {useForm, Controller} from 'react-hook-form';
 import {createOne} from '../../lib/Firebase';
 import useTodo from '../../hooks/useTodo';
 import {Todo} from '../../store/atoms/todo';
@@ -9,12 +10,24 @@ import moment from 'moment';
 import BasicButton from '../atoms/BasicButton';
 import BasicInput from '../atoms/BasicInput';
 
+type FormData = {
+  task: string;
+};
+
 const TodoInput: React.FC<Props> = props => {
   const queryClient = useQueryClient();
   const {addTaskCallback} = props;
-  const [task, setTask] = useState('');
   const {useMutaionTodo} = useTodo();
   const mutation = useMutaionTodo(queryClient, createOne as MutationFunction);
+  const {
+    control,
+    handleSubmit,
+    formState: {errors},
+  } = useForm({
+    defaultValues: {
+      task: '',
+    },
+  });
 
   const addTask = (newTask: string) => {
     mutation.mutate({
@@ -30,19 +43,33 @@ const TodoInput: React.FC<Props> = props => {
       } as unknown as Todo,
     });
   };
-  const onPressAddTaskButton = () => {
-    addTask(task);
+  const onPressAddTaskButton = (data: FormData) => {
+    addTask(data.task);
     addTaskCallback();
   };
 
   return (
     <Container>
-      <BasicInput
-        text={task}
-        setText={setTask}
-        placeholderText={'할 일을 입력해주세요.'}
+      <Controller
+        control={control}
+        rules={{
+          required: true,
+        }}
+        render={({field: {onChange, onBlur, value}}) => (
+          <BasicInput
+            text={value}
+            onBlur={onBlur}
+            onChange={onChange}
+            placeholderText={'할 일을 입력해주세요.'}
+          />
+        )}
+        name="task"
       />
-      <BasicButton title={'추가하기'} onPress={onPressAddTaskButton} />
+      {errors.task && <Text>This is required.</Text>}
+      <BasicButton
+        title={'추가하기'}
+        onPress={handleSubmit(onPressAddTaskButton)}
+      />
     </Container>
   );
 };
