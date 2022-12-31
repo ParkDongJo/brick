@@ -1,22 +1,21 @@
-import React, {Dispatch, SetStateAction} from 'react';
+import React from 'react';
 import {TextInput, View} from 'react-native';
 import styled from 'styled-components';
 
 const BasicInput: React.FC<Props> = ({
   text,
-  setText,
+  onBlur,
+  onChange,
   type = InputType.text,
   placeholderText,
 }) => {
-  const onChange = (newText: string) => {
-    setText(newText);
-  };
   return (
     <Container>
       <TextInput
         placeholder={placeholderText}
         onChangeText={onChange}
-        defaultValue={text}
+        onBlur={onBlur}
+        value={text}
         secureTextEntry={type === InputType.password}
       />
     </Container>
@@ -26,7 +25,8 @@ export default BasicInput;
 
 type Props = {
   text: string;
-  setText: Dispatch<SetStateAction<string>>;
+  onBlur: () => void;
+  onChange: (...event: any[]) => void;
   type?: InputType;
   placeholderText: string;
 };
