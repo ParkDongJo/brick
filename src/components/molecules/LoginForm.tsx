@@ -27,13 +27,10 @@ const LoginForm: React.FC<Props> = props => {
     },
   });
   const {show: toastShow} = useToast();
-  const {emailPattern, pwdPattern, phonePattern, validate} = useLoginForm();
+  const {emailPattern, pwdPattern, phonePattern} = useLoginForm();
 
   const onSubmit = (data: FormData) => {
     try {
-      if (!validate(type)) {
-        return;
-      }
       submit({email: data.email, password: data.password});
     } catch (err) {
       if (typeof err === 'string') {
@@ -63,7 +60,7 @@ const LoginForm: React.FC<Props> = props => {
             )}
             name="email"
           />
-          {errors.email && <Text>This is required.</Text>}
+          {errors.email && <Text>email is required.</Text>}
           <Controller
             control={control}
             rules={{
@@ -80,7 +77,7 @@ const LoginForm: React.FC<Props> = props => {
             )}
             name="password"
           />
-          {errors.password && <Text>This is required.</Text>}
+          {errors.password && <Text>password is required.</Text>}
         </>
       ) : (
         <>

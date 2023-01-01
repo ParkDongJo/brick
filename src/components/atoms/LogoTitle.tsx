@@ -5,7 +5,7 @@ const LogoTitle = () => {
   return (
     <Image
       style={{width: 50, height: 50}}
-      source={require('./../static/react-logo-icon.png')}
+      source={require('./../../static/react-logo-icon.png')}
     />
   );
 };
