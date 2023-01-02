@@ -8,13 +8,21 @@ import AlertModal, {
   Handle as ModalHandle,
 } from '../../components/atoms/AlertModal';
 import useTodo from '../../hooks/useTodo';
+import useUser, {USER_QUERY_KEY} from '../../hooks/useUser';
 import TodoList from '../../components/molecules/TodoList';
+import UserList from '../../components/molecules/UserList';
 import TodoInput from '../../components/molecules/TodoInput';
 
 const MyTodosScreen: React.FC<Props> = ({navigation}) => {
   const modalRef = useRef<ModalHandle>(null);
+  const {useQueryReceivers} = useUser();
   const {useQueryTodos} = useTodo();
-  const {isLoading, data} = useQueryTodos();
+  const {isLoading: isLoadingTodos, data: todos} = useQueryTodos();
+  const {isLoading: isLoadingUsers, data: users} = useQueryReceivers(
+    USER_QUERY_KEY.RECEIVERS,
+  );
+
+  const moveToReceiverTodos = (selectedId: string) => {};
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -25,7 +33,7 @@ const MyTodosScreen: React.FC<Props> = ({navigation}) => {
     });
   }, [navigation]);
 
-  if (isLoading) {
+  if (isLoadingTodos && isLoadingUsers) {
     return (
       <Container>
         <Text>Loading...</Text>
@@ -36,11 +44,8 @@ const MyTodosScreen: React.FC<Props> = ({navigation}) => {
   return (
     <Container>
       <TodoInput addTaskCallback={() => {}} />
-      <TodoList todos={data || []} />
-      <Button
-        title={'Move to Detail'}
-        onPress={() => navigation.navigate('Detail', {screenId: 1})}
-      />
+      <UserList datas={users || []} onClickItem={moveToReceiverTodos} />
+      <TodoList todos={todos || []} />
       <AlertModal ref={modalRef} />
     </Container>
   );
