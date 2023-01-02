@@ -1,17 +1,11 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
 import styled from 'styled-components';
-import {useForm, Controller} from 'react-hook-form';
-import BasicInput from '../../components/atoms/BasicInput';
+import {useForm} from 'react-hook-form';
 import BasicButton from '../../components/atoms/BasicButton';
-import useLoginForm from '../../hooks/useLoginForm';
 import useToast from '../../hooks/useToast';
-
-type FormData = {
-  email: string;
-  password: string;
-  phone: string;
-};
+import LoginEmailForm from './LoginEmailForm';
+import LoginPhoneForm from './LoginPhoneForm';
 
 const LoginForm: React.FC<Props> = props => {
   const {submit, type = FORM_TYPE.email} = props;
@@ -27,7 +21,6 @@ const LoginForm: React.FC<Props> = props => {
     },
   });
   const {show: toastShow} = useToast();
-  const {emailPattern, pwdPattern, phonePattern} = useLoginForm();
 
   const onSubmit = (data: FormData) => {
     try {
@@ -43,63 +36,9 @@ const LoginForm: React.FC<Props> = props => {
   return (
     <Container>
       {type === FORM_TYPE.email ? (
-        <>
-          <Controller
-            control={control}
-            rules={{
-              required: true,
-              pattern: emailPattern,
-            }}
-            render={({field: {onChange, onBlur, value}}) => (
-              <BasicInput
-                text={value}
-                onBlur={onBlur}
-                onChange={onChange}
-                placeholderText={'이메일을 입력하세요.'}
-              />
-            )}
-            name="email"
-          />
-          {errors.email && <Text>email is required.</Text>}
-          <Controller
-            control={control}
-            rules={{
-              required: true,
-              pattern: pwdPattern,
-            }}
-            render={({field: {onChange, onBlur, value}}) => (
-              <BasicInput
-                text={value}
-                onBlur={onBlur}
-                onChange={onChange}
-                placeholderText={'비밀번호를 입력하세요.'}
-              />
-            )}
-            name="password"
-          />
-          {errors.password && <Text>password is required.</Text>}
-        </>
+        <LoginEmailForm control={control} errors={errors} />
       ) : (
-        <>
-          <Controller
-            control={control}
-            rules={{
-              required: true,
-              maxLength: 11,
-              pattern: phonePattern,
-            }}
-            render={({field: {onChange, onBlur, value}}) => (
-              <BasicInput
-                text={value}
-                onBlur={onBlur}
-                onChange={onChange}
-                placeholderText={'전화번호를 입력하세요.'}
-              />
-            )}
-            name="phone"
-          />
-          {errors.phone && <Text>This is required.</Text>}
-        </>
+        <LoginPhoneForm control={control} errors={errors} />
       )}
       <BasicButton title="인증하기" onPress={handleSubmit(onSubmit)} />
     </Container>
@@ -123,6 +62,12 @@ export enum FORM_TYPE {
   email = 'email',
   phone = 'phone',
 }
+
+export type FormData = {
+  email: string;
+  password: string;
+  phone: string;
+};
 
 const Container = styled(View)`
   flex: 1;
