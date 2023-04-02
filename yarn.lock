@@ -1396,6 +1396,14 @@
   resolved "https://registry.yarnpkg.com/@react-native-firebase/firestore/-/firestore-16.4.3.tgz#abc28c3a98e51b47ccd5af825109f55d6af56652"
   integrity sha512-T68PkKZzTfXTU8cUJTUUBBKQ4rNZ+XUHGoh38FHqTOLeSATyKa22oDuS+eOtakUSZTUnUEcquJmH5AvqSfsO3A==
 
+"@react-native-material/core@^1.3.7":
+  version "1.3.7"
+  resolved "https://registry.yarnpkg.com/@react-native-material/core/-/core-1.3.7.tgz#8233a3681b3ba046a400493daa0878aa3c0bf04a"
+  integrity sha512-N5d/zKrmL3+fVyWsc/jFRxsDl59N5t3tYx9RlxhV04tQlcFKo9UlyBqCWDZFlxrkLrq3JY5zTRCMJAM3yvOz5w==
+  dependencies:
+    chroma-js "^2.4.2"
+    react-native-flex-layout "^0.1.5"
+
 "@react-native-seoul/kakao-login@^5.2.4":
   version "5.2.4"
   resolved "https://registry.yarnpkg.com/@react-native-seoul/kakao-login/-/kakao-login-5.2.4.tgz#1bc75c545c754e5372ff813fbc5b9aadcc2ac0e6"
@@ -2523,6 +2531,11 @@ char-regex@^1.0.2:
   resolved "https://registry.yarnpkg.com/char-regex/-/char-regex-1.0.2.tgz#d744358226217f981ed58f479b1d6bcc29545dcf"
   integrity sha512-kWWXztvZ5SBQV+eRgKFeh8q5sLuZY2+8WUIzlxWVTg+oGwY14qylx1KbKzHd8P6ZYkAg0xyIDU9JMHhyJMZ1jw==
 
+chroma-js@^2.4.2:
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/chroma-js/-/chroma-js-2.4.2.tgz#dffc214ed0c11fa8eefca2c36651d8e57cbfb2b0"
+  integrity sha512-U9eDw6+wt7V8z5NncY2jJfZa+hUH8XEj8FQHgFJTrUFnJfXYf4Ml4adI2vXZOjqRDpFWtYVWypDfZwnJ+HIR4A==
+
 ci-info@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ci-info/-/ci-info-2.0.0.tgz#67a9e964be31a51e15e5010d58e6f12834002f46"
@@ -3605,7 +3618,7 @@ flat-cache@^3.0.4:
     flatted "^3.1.0"
     rimraf "^3.0.2"
 
-flatted@^3.1.0:
+flatted@^3.1.0, flatted@^3.2.4:
   version "3.2.7"
   resolved "https://registry.yarnpkg.com/flatted/-/flatted-3.2.7.tgz#609f39207cb614b89d0765b477cb2d437fbf9787"
   integrity sha512-5nqDSxl8nn5BSNxyR3n4I6eDmbolI6WT+QqR547RwxQapgjQBmtktdP+HTBb/a/zLsbzERTONyUB5pefh5TtjQ==
@@ -6490,6 +6503,16 @@ react-native-device-info@^10.1.1:
   resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-10.1.1.tgz#ef9795638e4e1427b8e92b37e1ff85dda5a2192f"
   integrity sha512-yvFzqDXGgDx+9sU098iF4dKBge1z3sDULmemL3na32pz41uQhvqSCMdRa6WlH7WFM8RFBSPq5IMnn9EBKtiAFg==
 
+react-native-flex-layout@^0.1.5:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/react-native-flex-layout/-/react-native-flex-layout-0.1.5.tgz#147379c9286a6d6999cd942dc9f4bdec75514ddd"
+  integrity sha512-DrLir5Wl0RhgJXHeDBSaa1Y1LdpNuoz0PEe5E1T1+xVWt2DAz/r+1N8bnhtVkTKJE6WrH6jIH2hoe8kogR0X+w==
+
+react-native-flipper@^0.187.0:
+  version "0.187.1"
+  resolved "https://registry.yarnpkg.com/react-native-flipper/-/react-native-flipper-0.187.1.tgz#1d9be0046effe07f4ae73899aa8a4e30474fb262"
+  integrity sha512-YN9Qql7ypL6UduJpHa5oF4573ls3vW1Q4YY8v7Zzpf5SYf9cscPb9vDgBuG8ktW/+bebOiE6wiIbmHy5wfF3Eg==
+
 react-native-gesture-handler@^2.6.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-2.6.0.tgz#8eeb25a2be9718db2e241084f4a337bec0e30ed1"
@@ -6587,6 +6610,13 @@ react-native@0.70.0:
     use-sync-external-store "^1.0.0"
     whatwg-fetch "^3.0.0"
     ws "^6.1.4"
+
+react-query-native-devtools@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/react-query-native-devtools/-/react-query-native-devtools-4.0.0.tgz#97d484d024503d484652f6e64a07c188f99ae702"
+  integrity sha512-TKwYO0tcw744c2aI1AGL2zoLycx3mr6Apl/3p9EIxh204kWGBpF7OhPQY7OKSdPvgw1jG6wlKzfAj3asgCSZGg==
+  dependencies:
+    flatted "^3.2.4"
 
 react-refresh@^0.4.0:
   version "0.4.3"
