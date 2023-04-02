@@ -9,7 +9,12 @@ export const todosState = atom<Todo[]>({
 export type Todo = {
   id: string;
   userId: string;
+  coachId: string;
   title: string;
+  memo: string;
+  tags: string;
+  time: string;
+  isLoop: boolean;
   isDone: boolean;
   isChecked: boolean;
   createdAt: moment.Moment;
