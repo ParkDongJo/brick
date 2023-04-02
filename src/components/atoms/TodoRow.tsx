@@ -8,8 +8,10 @@ import {
 } from 'react-native';
 import styled from 'styled-components';
 import TestIds from '../../lib/TestIds';
+import {Todo} from '../../store/atoms/todo';
 
-const Todo: React.FC<Props> = ({title, onPressCheck, onPressDelete}) => {
+const TodoRow: React.FC<Props> = ({datas, onPressCheck, onPressDelete}) => {
+  const {title, memo, time, category} = datas;
   const [isChecked, setIsChecked] = useState(false);
   const handleClick = () => {
     setIsChecked(!isChecked);
@@ -20,35 +22,47 @@ const Todo: React.FC<Props> = ({title, onPressCheck, onPressDelete}) => {
     onPressDelete();
   };
   return (
-    <Container accessible={true} accessibilityLabel={'listitem'}>
-      <TouchableOpacity
-        testID={TestIds.TODOROW_TOUCH_ROW}
-        onPress={handleClick}>
-        {isChecked && (
-          <Icon testID={TestIds.TODOROW_SHOW_CHECKICON}>
-            <Text>V</Text>
-          </Icon>
-        )}
-        <Text>{title}</Text>
-        <Button onPress={handleClickDeleteBtn} title={'삭제'} />
-      </TouchableOpacity>
-    </Container>
+    <TouchableOpacity testID={TestIds.TODOROW_TOUCH_ROW} onPress={handleClick}>
+      <Container accessible={true} accessibilityLabel={'listitem'}>
+        <Left>
+          <Text>{time}</Text>
+        </Left>
+        <Right>
+          <Tag>{category}</Tag>
+          <Text>{title}</Text>
+          <Text>{memo}</Text>
+        </Right>
+      </Container>
+    </TouchableOpacity>
   );
 };
-export default Todo;
+export default TodoRow;
 
 export type Props = {
-  title: string;
+  datas: Todo;
   onPressCheck(): void;
   onPressDelete(): void;
 };
 
 const Container = styled(View)`
-  background-color: '#f9c2ff';
-  padding: 20px;
-  margin-vertical: 8px;
-  margin-horizontal: 16px;
+  width: 100%;
+  flex-direction: row;
+  background-color: #fff;
 `;
-const Icon = styled(View)`
-  justify-conten: start;
+const Left = styled(View)`
+  width: 100px;
+  height: 100px;
+  font-size: 20px;
+  font-weight: bold;
+  align-items: center;
+  justify-content: center;
+`;
+const Right = styled(View)`
+  flex-direction: column;
+  justify-content: center;
+`;
+const Tag = styled(Text)`
+  font-color: #eee;
+  font-size: 10px;
+  font-weight: bold;
 `;

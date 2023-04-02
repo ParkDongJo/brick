@@ -1,32 +1,41 @@
 import React from 'react';
 import {TextInput, View} from 'react-native';
-import styled from 'styled-components';
 
 const BasicInput: React.FC<Props> = ({
   text,
+  mutiline = false,
   onBlur,
   onChange,
+  onSubmitEditing,
+  onKeyPress,
   type = InputType.text,
   placeholderText,
 }) => {
   return (
-    <Container>
+    <>
       <TextInput
         placeholder={placeholderText}
+        mutiline={mutiline}
         onChangeText={onChange}
         onBlur={onBlur}
+        onSubmitEditing={onSubmitEditing}
+        onKeyPress={onKeyPress}
         value={text}
+        returnKeyType="done"
         secureTextEntry={type === InputType.password}
       />
-    </Container>
+    </>
   );
 };
 export default BasicInput;
 
 type Props = {
   text: string;
-  onBlur: () => void;
+  mutiline?: boolean;
+  onBlur: (...event: any[]) => void;
   onChange: (...event: any[]) => void;
+  onSubmitEditing?: (...event: any[]) => void;
+  onKeyPress?: (...event: any[]) => void;
   type?: InputType;
   placeholderText: string;
 };
@@ -34,8 +43,3 @@ export enum InputType {
   text = 'text',
   password = 'password',
 }
-
-const Container = styled(View)`
-  padding: 5px 10px;
-  border-bottom: 1px solid #000;
-`;
