@@ -32,7 +32,6 @@ const LoginEmailForm: React.FC<Props> = props => {
         control={control}
         rules={{
           required: true,
-          pattern: pwdPattern,
         }}
         render={({field: {onChange, onBlur, value}}) => (
           <BasicInput
