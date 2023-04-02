@@ -1,37 +1,34 @@
 import React, {useRef, useLayoutEffect} from 'react';
-import {View, Text, Button} from 'react-native';
+import {View, Text, useWindowDimensions, Button} from 'react-native';
 import styled from 'styled-components';
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {TodosStackScreensParamList} from '../../lib/TodosStackScreens';
-import LogoTitle from '../../components/atoms/LogoTitle';
 import AlertModal, {
   Handle as ModalHandle,
-} from '../../components/atoms/AlertModal';
-import useTodo from '../../hooks/useTodo';
-import useUser, {USER_QUERY_KEY} from '../../hooks/useUser';
+} from '../../components/molecules/AlertModal';
+import useQueries, {QUERY_KEY} from '../../hooks/useQueries';
 import TodoList from '../../components/molecules/TodoList';
-import UserList from '../../components/molecules/UserList';
-import TodoInput from '../../components/molecules/TodoInput';
 
 const MyTodosScreen: React.FC<Props> = ({navigation}) => {
   const modalRef = useRef<ModalHandle>(null);
-  const {useQueryReceivers} = useUser();
-  const {useQueryTodos} = useTodo();
+  const {useQueryTodos, useQueryReceivers} = useQueries();
+  const {height, width} = useWindowDimensions();
   const {isLoading: isLoadingTodos, data: todos} = useQueryTodos();
   const {isLoading: isLoadingUsers, data: users} = useQueryReceivers(
-    USER_QUERY_KEY.RECEIVERS,
+    QUERY_KEY.RECEIVERS,
   );
-
-  const moveToReceiverTodos = (selectedId: string) => {};
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerTitle: _props => <LogoTitle />,
       headerRight: () => (
         <Button onPress={() => console.log('Test')} title="Update count" />
       ),
     });
   }, [navigation]);
+
+  const navigateToAddForm = () => {
+    navigation.navigate('AddForm');
+  };
 
   if (isLoadingTodos && isLoadingUsers) {
     return (
@@ -43,9 +40,14 @@ const MyTodosScreen: React.FC<Props> = ({navigation}) => {
 
   return (
     <Container>
-      <TodoInput addTaskCallback={() => {}} />
-      <UserList datas={users || []} onClickItem={moveToReceiverTodos} />
       <TodoList todos={todos || []} />
+      <Bottom>
+        <Button
+          title="Button"
+          style={bottomButtonStyle}
+          onPress={navigateToAddForm}
+        />
+      </Bottom>
       <AlertModal ref={modalRef} />
     </Container>
   );
@@ -56,6 +58,18 @@ type Props = {} & NativeStackScreenProps<TodosStackScreensParamList, 'MyTodos'>;
 
 const Container = styled(View)`
   flex: 1;
-  align-items: center;
-  justify-content: center;
+  height: 100%;
 `;
+const Bottom = styled(View)`
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: #fff;
+  z-index: 1;
+  padding: 5px 10px;
+`;
+const bottomButtonStyle = {
+  height: 50,
+  alignItems: 'center',
+  justifyContent: 'center',
+};

@@ -5,7 +5,7 @@ import {waitFor} from '@testing-library/react';
 jest.mock('@tanstack/react-query');
 import {useQuery} from '@tanstack/react-query';
 import {RecoilRoot} from 'recoil';
-import MyTodosScreen, {Props} from './MyTodosScreen';
+import MyTodosScreen, {Props} from './TodosScreen';
 import RecoilObserver from '../../store/RecoilObserver';
 import {todosState} from '../../store/atoms/todo';
 import todos from '../../../fixtures/todos';
