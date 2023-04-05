@@ -1,8 +1,8 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import MyTodosScreen from '../pages/todo/TodosScreen';
-import DetailScreen from '../pages/todo/DetailScreen';
-import AddFormScreen from '../pages/todo/AddFormScreen';
+import MyTodosScreen from '../../pages/todo/TodosScreen';
+import DetailScreen from '../../pages/todo/DetailScreen';
+import TodoFormScreen from '../../pages/todo/TodoFormScreen';
 
 const Stack = createNativeStackNavigator<TodosStackScreensParamList>();
 
@@ -18,11 +18,11 @@ const TodosStackScreens = () => {
       />
       <Stack.Screen name="Detail" component={DetailScreen} />
       <Stack.Screen
-        name="AddForm"
+        name="TodoForm"
         options={{
           title: '',
         }}
-        component={AddFormScreen}
+        component={TodoFormScreen}
       />
     </Stack.Navigator>
   );
@@ -32,5 +32,5 @@ export default TodosStackScreens;
 export type TodosStackScreensParamList = {
   MyTodos: undefined;
   Detail: {screenId: 1};
-  AddForm: undefined;
+  TodoForm: undefined;
 };

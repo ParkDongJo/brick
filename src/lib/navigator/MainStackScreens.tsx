@@ -1,8 +1,8 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import LoginScreen from '../pages/auth/LoginScreen';
-import EmailLoginScreen from '../pages/auth/EmailLoginScreen';
-import PhoneLoginScreen from '../pages/auth/PhoneLoginScreen';
+import LoginScreen from '../../pages/auth/LoginScreen';
+import EmailLoginScreen from '../../pages/auth/EmailLoginScreen';
+import PhoneLoginScreen from '../../pages/auth/PhoneLoginScreen';
 import TodosStackScreens from './TodosStackScreens';
 
 const Stack = createNativeStackNavigator<TodosStackScreensParamList>();
