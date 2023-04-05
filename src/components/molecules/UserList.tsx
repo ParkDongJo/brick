@@ -1,23 +1,27 @@
 import React from 'react';
 import {FlatList, Text} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import UserRow from '../../components/atoms/UserRow';
-import {Receiver} from '../../store/atoms/receiver';
+import {User} from '../../store/atoms/users';
+import users from '../../../fixtures/users';
 
 const UserList: React.FC<Props> = props => {
-  const {datas, onClickItem} = props;
-  const handleClickItem = (rowId: string) => {
-    onClickItem(rowId);
+  const {datas} = props;
+  const navigation = useNavigation();
+
+  const handleClickItem = (userId: string) => {
+    navigation.navigate('Todos', {userId});
   };
 
   return (
     <>
-      {datas.length ? (
+      {users.length ? (
         <FlatList
-          data={datas}
+          data={users}
           accessible={true}
           accessibilityRole={'list'}
           keyExtractor={data => data.id}
-          renderItem={({item}: {item: Receiver}) => (
+          renderItem={({item}: {item: User}) => (
             <UserRow
               id={item.id}
               name={item.name}
@@ -37,6 +41,5 @@ const UserList: React.FC<Props> = props => {
 export default UserList;
 
 type Props = {
-  datas: Receiver[];
-  onClickItem(id: string): void;
+  datas: User[];
 };

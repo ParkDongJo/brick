@@ -1,33 +1,42 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import LoginScreen from '../../pages/auth/LoginScreen';
-import EmailLoginScreen from '../../pages/auth/EmailLoginScreen';
-import PhoneLoginScreen from '../../pages/auth/PhoneLoginScreen';
-import TodosStackScreens from './TodosStackScreens';
+import TodosScreen from '../../pages/todo/TodosScreen';
+import UsersScreen from '../../pages/user/UsersScreen';
+import TodoFormScreen from '../../pages/todo/TodoFormScreen';
 
-const Stack = createNativeStackNavigator<TodosStackScreensParamList>();
+const Stack = createNativeStackNavigator<MainStackScreensParamList>();
 
 const MainStackScreens = () => {
   return (
-    <Stack.Navigator initialRouteName="Index">
-      <Stack.Screen name="Login" component={LoginScreen} />
-      <Stack.Screen name="EmailLogin" component={EmailLoginScreen} />
-      <Stack.Screen name="PhoneLogin" component={PhoneLoginScreen} />
+    <Stack.Navigator initialRouteName={'Users'}>
       <Stack.Screen
-        name="Index"
+        name="Todos"
         options={{
-          headerShown: false,
+          title: '',
         }}
-        component={TodosStackScreens}
+        component={TodosScreen}
+      />
+      <Stack.Screen
+        name="TodoForm"
+        options={{
+          title: '',
+        }}
+        component={TodoFormScreen}
+      />
+      <Stack.Screen
+        name="Users"
+        options={{
+          title: '',
+        }}
+        component={UsersScreen}
       />
     </Stack.Navigator>
   );
 };
 export default MainStackScreens;
 
-export type TodosStackScreensParamList = {
-  Login: undefined;
-  EmailLogin: undefined;
-  PhoneLogin: undefined;
-  Index: undefined;
+export type MainStackScreensParamList = {
+  Todos: undefined;
+  TodoForm: undefined;
+  Users: undefined;
 };

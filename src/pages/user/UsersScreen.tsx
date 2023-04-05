@@ -6,13 +6,15 @@ import {MainStackScreensParamList} from '../../lib/navigator/MainStackScreens';
 import AlertModal, {
   Handle as ModalHandle,
 } from '../../components/molecules/AlertModal';
-import useQueries from '../../hooks/useQueries';
-import TodoList from '../../components/molecules/TodoList';
+import useQueries, {QUERY_KEY} from '../../hooks/useQueries';
+import UserList from '../../components/molecules/UserList';
 
-const TodosScreen: React.FC<Props> = ({navigation}) => {
+const UsersScreen: React.FC<Props> = ({navigation}) => {
   const modalRef = useRef<ModalHandle>(null);
-  const {useQueryTodos} = useQueries();
-  const {isLoading: isLoadingTodos, data: todos} = useQueryTodos();
+  const {useQueryUsers} = useQueries();
+  const {isLoading: isLoadingUsers, data: users} = useQueryUsers(
+    QUERY_KEY.USERS,
+  );
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -23,10 +25,10 @@ const TodosScreen: React.FC<Props> = ({navigation}) => {
   }, [navigation]);
 
   const navigateToForm = () => {
-    navigation.navigate('TodoForm');
+    navigation.navigate('Todos');
   };
 
-  if (isLoadingTodos) {
+  if (isLoadingUsers) {
     return (
       <Container>
         <Text>Loading...</Text>
@@ -36,7 +38,7 @@ const TodosScreen: React.FC<Props> = ({navigation}) => {
 
   return (
     <Container>
-      <TodoList todos={todos || []} />
+      <UserList datas={users || []} />
       <Bottom>
         <BottomButton title="추가하기" onPress={navigateToForm} />
       </Bottom>
@@ -44,9 +46,9 @@ const TodosScreen: React.FC<Props> = ({navigation}) => {
     </Container>
   );
 };
-export default TodosScreen;
+export default UsersScreen;
 
-type Props = {} & NativeStackScreenProps<MainStackScreensParamList, 'Todos'>;
+type Props = {} & NativeStackScreenProps<MainStackScreensParamList, 'Users'>;
 
 const Container = styled(View)`
   flex: 1;

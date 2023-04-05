@@ -5,7 +5,7 @@ import {waitFor} from '@testing-library/react';
 jest.mock('@tanstack/react-query');
 import {useQuery} from '@tanstack/react-query';
 import {RecoilRoot} from 'recoil';
-import MyTodosScreen, {Props} from './TodosScreen';
+import TodosScreen, {Props} from './TodosScreen';
 import RecoilObserver from '../../store/RecoilObserver';
 import {todosState} from '../../store/atoms/todo';
 import todos from '../../../fixtures/todos';
@@ -50,7 +50,7 @@ describe('TodosScreen render', () => {
     return (
       <RecoilRoot>
         <RecoilObserver node={todosState} mockFn={mockSetTodosFn} />
-        <MyTodosScreen {...temprops} />
+        <TodosScreen {...temprops} />
       </RecoilRoot>
     );
   }
