@@ -1,7 +1,7 @@
 import {renderHook} from '@testing-library/react';
 import {useQuery} from '@tanstack/react-query';
 import useQueries, {QUERY_KEY} from './useQueries';
-import receivers from '../../fixtures/receivers';
+import users from '../../fixtures/users';
 
 jest.mock('@tanstack/react-query');
 
@@ -9,7 +9,7 @@ describe('useQueries', () => {
   beforeEach(() => {
     jest.useFakeTimers();
     useQuery.mockReturnValue({
-      data: receivers,
+      data: users,
       isLoading: false,
       error: {},
     });
@@ -22,8 +22,8 @@ describe('useQueries', () => {
   });
 
   it('When run useQueryReceivers', async () => {
-    const {useQueryReceivers} = useQueries();
-    const {result} = renderHook(() => useQueryReceivers(QUERY_KEY.RECEIVERS));
+    const {useQueryUsers} = useQueries();
+    const {result} = renderHook(() => useQueryUsers(QUERY_KEY.USERS));
 
     expect(result.current.data).toHaveLength(2);
   });

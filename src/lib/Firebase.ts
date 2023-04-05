@@ -2,7 +2,6 @@ import firestore, {
   FirebaseFirestoreTypes,
 } from '@react-native-firebase/firestore';
 import {Todo} from '../store/atoms/todo';
-import {Receiver} from '../store/atoms/receiver';
 
 export type FirestoreDocumentData =
   FirebaseFirestoreTypes.QuerySnapshot<FirebaseFirestoreTypes.DocumentData>;

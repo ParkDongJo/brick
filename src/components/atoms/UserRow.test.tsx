@@ -2,11 +2,11 @@ import React from 'react';
 import {fireEvent, render} from '@testing-library/react-native';
 import UserRow, {Props} from './UserRow';
 import TestIds from '../../lib/TestIds';
-import receivers from '../../../fixtures/receivers';
+import users from '../../../fixtures/users';
 
 describe('UserRow', () => {
   const mockClickRowFn = jest.fn();
-  const props = receivers[0];
+  const props = users[0];
 
   function renderUserRow({
     id,

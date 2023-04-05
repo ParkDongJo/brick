@@ -6,53 +6,9 @@ import {updateOne, removeOne} from '../../lib/Firebase';
 import TodoRow from '../atoms/TodoRow';
 import {Todo} from '../../store/atoms/todo';
 import useQueries from '../../hooks/useQueries';
-import moment from 'moment';
+import todos from '../../../fixtures/todos';
 
 const TodoList: React.FC<Props> = props => {
-  const todos = [
-    {
-      id: '1',
-      userId: '1',
-      coachId: '2',
-      time: '9:00 AM',
-      title: 'Finish Project',
-      tags: '#work #study',
-      memo: 'Finish Project by 10:00 AM',
-      category: '#work',
-      isDone: false,
-      isChecked: false,
-      createdAt: moment(),
-      deadlineAt: moment(),
-    },
-    {
-      id: '2',
-      userId: '1',
-      coachId: '2',
-      time: '2:00 PM',
-      title: 'Go to Gym',
-      tags: '#work #study',
-      memo: 'Go to Gym by 3:00 PM',
-      category: '#helth',
-      isDone: false,
-      isChecked: false,
-      createdAt: moment(),
-      deadlineAt: moment(),
-    },
-    {
-      id: '3',
-      userId: '1',
-      coachId: '2',
-      time: '6:00 PM',
-      title: 'Cook Dinner',
-      tags: '#work #study',
-      memo: 'Cook Dinner by 7:00 PM',
-      category: '#study',
-      isDone: false,
-      isChecked: false,
-      createdAt: moment(),
-      deadlineAt: moment(),
-    },
-  ];
   const queryClient = useQueryClient();
   const {useMutaionTodo} = useQueries();
   const updateMutation = useMutaionTodo(
