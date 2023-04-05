@@ -7,12 +7,14 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import styled from 'styled-components';
+import useTodo from '../../hooks/useTodo';
 import TestIds from '../../lib/TestIds';
 import {Todo} from '../../store/atoms/todo';
 
 const TodoRow: React.FC<Props> = ({datas, onPressCheck, onPressDelete}) => {
-  const {title, memo, time, category} = datas;
+  const {title, memo, time, tags} = datas;
   const [isChecked, setIsChecked] = useState(false);
+  const {convertTags} = useTodo();
   const handleClick = () => {
     setIsChecked(!isChecked);
     onPressCheck();
@@ -28,7 +30,7 @@ const TodoRow: React.FC<Props> = ({datas, onPressCheck, onPressDelete}) => {
           <Text>{time}</Text>
         </Left>
         <Right>
-          <Tag>{category}</Tag>
+          <Tag>{convertTags(tags)}</Tag>
           <Text>{title}</Text>
           <Text>{memo}</Text>
         </Right>

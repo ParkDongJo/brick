@@ -26,8 +26,8 @@ const MyTodosScreen: React.FC<Props> = ({navigation}) => {
     });
   }, [navigation]);
 
-  const navigateToAddForm = () => {
-    navigation.navigate('AddForm');
+  const navigateToForm = () => {
+    navigation.navigate('TodoForm');
   };
 
   if (isLoadingTodos && isLoadingUsers) {
@@ -42,11 +42,7 @@ const MyTodosScreen: React.FC<Props> = ({navigation}) => {
     <Container>
       <TodoList todos={todos || []} />
       <Bottom>
-        <Button
-          title="Button"
-          style={bottomButtonStyle}
-          onPress={navigateToAddForm}
-        />
+        <BottomButton title="추가하기" onPress={navigateToForm} />
       </Bottom>
       <AlertModal ref={modalRef} />
     </Container>
@@ -68,8 +64,8 @@ const Bottom = styled(View)`
   z-index: 1;
   padding: 5px 10px;
 `;
-const bottomButtonStyle = {
-  height: 50,
-  alignItems: 'center',
-  justifyContent: 'center',
-};
+const BottomButton = styled(Button)`
+  height: 50
+  alignItems: center
+  justifyContent: center
+`;
