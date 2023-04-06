@@ -4,8 +4,8 @@ import {
   QueryClient,
   MutationFunction,
 } from '@tanstack/react-query';
-import {Todo} from '../store/atoms/todo';
-import {User} from '../store/atoms/users';
+import {Todo, User} from '../types';
+import useAuth from './useAuth';
 import {
   fetchOne,
   fetchAll,
