@@ -17,9 +17,11 @@ import {
 export const QUERY_KEY = {
   TODOS: 'todos',
   USERS: 'users',
+  ME: 'me',
 };
 
 const useQueries = () => {
+  const {getUid} = useAuth();
   const getMe = () => ({userId: '111'});
 
   return {
@@ -50,6 +52,15 @@ const useQueries = () => {
           queryClient.invalidateQueries({queryKey: [QUERY_KEY.USERS]});
         },
       }),
+    useQueryMe: (key: typeof QUERY_KEY.ME) => {
+      const uid = getUid();
+      if (!uid) {
+        return {isLoading: false, data: null};
+      }
+      return useQuery<User>([key], {
+        queryFn: () => fetchOne({collection: key, docId: uid}) as Promise<User>,
+      });
+    },
   };
 };
 export default useQueries;

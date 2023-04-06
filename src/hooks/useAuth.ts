@@ -29,7 +29,12 @@ const useAuth = () => {
   };
   const signOut = () => {};
 
+  const getUid = () => {
+    return auth().currentUser?.uid;
+  };
+
   return {
+    getUid,
     signInEmail,
     signOut,
     signInPhone,

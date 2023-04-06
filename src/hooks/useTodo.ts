@@ -1,10 +1,10 @@
 import {UseMutationResult} from '@tanstack/react-query';
 import moment from 'moment';
-
-import {Todo} from '../store/atoms/todo';
-import {FormData} from '../types';
+import {FormData, Todo} from '../types';
+import useAuth from './useAuth';
 
 const useTodo = (mutation?: UseMutationResult) => {
+  const {getUid} = useAuth();
   //A tag is a string of characters like "#study #work".
   // It extracts the words after # and turns them into an array of strings.
   //It returns the result.
@@ -15,12 +15,15 @@ const useTodo = (mutation?: UseMutationResult) => {
     }
     return result.map(tag => tag.replace('#', ''));
   };
-  const addTodo = (newTask: FormData) => {
+  const addTodo = (newTodo: FormData) => {
+    const {} = newTodo;
     mutation?.mutate({
       collection: 'todos',
-      doc: {
+      docKey: getUid(),
+      data: {
         id: 'xxx',
-        userId: 'test',
+        userId: getUid(),
+        managerId: getUid(),
         title: newTask,
         isDone: false,
         isChecked: false,

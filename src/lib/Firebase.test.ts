@@ -20,7 +20,7 @@ describe('useFirebase', () => {
   test('create firestore', async () => {
     const resp = await createOne({
       collection: 'todos',
-      doc: {
+      data: {
         userId: 'xx',
         title: 'xx',
         isDone: true,

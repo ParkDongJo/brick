@@ -42,13 +42,15 @@ export const fetchOne = async ({
 
 export const createOne = async ({
   collection,
-  doc,
+  docKey,
+  data,
 }: {
   collection: string;
-  doc: Todo;
+  docKey: string;
+  data: Todo;
 }) => {
   try {
-    const resp = await firestore().collection(collection).add(doc);
+    const resp = await firestore().collection(collection).doc(docKey).set(data);
     return resp;
   } catch (err) {
     return null;
