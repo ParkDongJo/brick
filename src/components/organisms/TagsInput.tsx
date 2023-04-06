@@ -3,7 +3,7 @@ import {View, Button} from 'react-native';
 import styled from 'styled-components';
 import {Controller, useForm} from 'react-hook-form';
 import BasicInput from '../atoms/BasicInput';
-import Bagdes from '../molecules/Bagdes';
+import Bagdes from '../atoms/Bagdes';
 import useTodo from '../../hooks/useTodo';
 
 const TagsInput: React.FC<Props> = props => {
