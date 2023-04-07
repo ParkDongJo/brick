@@ -6,6 +6,23 @@ import {Todo} from '../store/atoms/todo';
 export type FirestoreDocumentData =
   FirebaseFirestoreTypes.QuerySnapshot<FirebaseFirestoreTypes.DocumentData>;
 
+export type WhereQuery = {
+  field: string;
+  operation: WhereFilterOp;
+  value: string | number | boolean;
+};
+type WhereFilterOp =
+  | '<'
+  | '<='
+  | '=='
+  | '>'
+  | '>='
+  | '!='
+  | 'array-contains'
+  | 'array-contains-any'
+  | 'in'
+  | 'not-in';
+
 export const fetchAll = async (collection: string): Promise<any[]> => {
   try {
     const snapshot = await firestore().collection(collection).get();
@@ -37,6 +54,27 @@ export const fetchOne = async ({
     return docSnapshot.data() || {};
   } catch (err) {
     return null;
+  }
+};
+
+export const fetchAllByWhere = async ({
+  collection,
+  where: {field, operation, value},
+}: {
+  collection: string;
+  where: WhereQuery;
+}) => {
+  try {
+    const snapshot = await firestore()
+      .collection(collection)
+      .where(field, operation, value)
+      .get();
+    return snapshot.docs.map(data => ({
+      id: data.id,
+      ...data.data(),
+    }));
+  } catch (err) {
+    return [];
   }
 };
 
