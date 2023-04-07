@@ -9,6 +9,8 @@ import useAuth from './useAuth';
 import {
   fetchOne,
   fetchAll,
+  fetchAllByWhere,
+  WhereQuery,
   createOne,
   updateOne,
   removeOne,
@@ -17,6 +19,7 @@ import {
 export const QUERY_KEY = {
   TODOS: 'todos',
   USERS: 'users',
+  USERS_BY_WHERE: 'usersByWhere',
   ME: 'me',
 };
 
@@ -42,6 +45,12 @@ const useQueries = () => {
       return useQuery<User[]>([key], {
         queryFn: () =>
           fetchOne({collection: key, docId: userId}) as Promise<User[]>,
+      });
+    },
+    useQueryUsersByWhere: (key: typeof QUERY_KEY.USERS, where: WhereQuery) => {
+      return useQuery<User[]>([key], {
+        queryFn: () =>
+          fetchAllByWhere({collection: key, where}) as Promise<User[]>,
       });
     },
     useMutaionUser: (queryClient: QueryClient, fn: MutationFunction) =>
