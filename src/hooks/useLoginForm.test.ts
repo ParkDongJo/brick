@@ -1,6 +1,6 @@
 import {renderHook, act} from '@testing-library/react-hooks';
 import useLoginForm from './useLoginForm';
-import {FORM_TYPE} from '../components/molecules/LoginForm';
+import {FORM_TYPE} from '../components/organisms/LoginForm';
 
 describe('useLoginForm', () => {
   beforeEach(() => {

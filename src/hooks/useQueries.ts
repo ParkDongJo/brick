@@ -41,10 +41,20 @@ const useQueries = () => {
         },
       }),
     useQueryUsers: (key: typeof QUERY_KEY.USERS) => {
-      const {userId} = getMe();
+      const uid = getUid();
+      if (!uid) {
+        return {isLoading: false, data: null};
+      }
       return useQuery<User[]>([key], {
         queryFn: () =>
-          fetchOne({collection: key, docId: userId}) as Promise<User[]>,
+          fetchAllByWhere({
+            collection: 'users',
+            where: {
+              field: 'managers',
+              operation: 'array-contains',
+              value: uid,
+            },
+          }) as Promise<User[]>,
       });
     },
     useQueryUsersByWhere: (key: typeof QUERY_KEY.USERS, where: WhereQuery) => {

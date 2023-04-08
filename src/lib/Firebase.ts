@@ -1,7 +1,7 @@
 import firestore, {
   FirebaseFirestoreTypes,
 } from '@react-native-firebase/firestore';
-import {Todo} from '../store/atoms/todo';
+import {Todo} from '../types';
 
 export type FirestoreDocumentData =
   FirebaseFirestoreTypes.QuerySnapshot<FirebaseFirestoreTypes.DocumentData>;
@@ -69,10 +69,8 @@ export const fetchAllByWhere = async ({
       .collection(collection)
       .where(field, operation, value)
       .get();
-    return snapshot.docs.map(data => ({
-      id: data.id,
-      ...data.data(),
-    }));
+
+    return snapshot.docs.map(data => data.data());
   } catch (err) {
     return [];
   }
