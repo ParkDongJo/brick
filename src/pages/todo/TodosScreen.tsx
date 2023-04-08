@@ -5,9 +5,9 @@ import type {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {MainStackScreensParamList} from '../../lib/navigator/MainStackScreens';
 import AlertModal, {
   Handle as ModalHandle,
-} from '../../components/molecules/AlertModal';
+} from '../../components/organisms/AlertModal';
 import useQueries from '../../hooks/useQueries';
-import TodoList from '../../components/molecules/TodoList';
+import TodoList from '../../components/organisms/TodoList';
 
 const TodosScreen: React.FC<Props> = ({navigation}) => {
   const modalRef = useRef<ModalHandle>(null);

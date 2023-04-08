@@ -3,7 +3,7 @@ import {View} from 'react-native';
 import styled from 'styled-components';
 import auth from '@react-native-firebase/auth';
 import {useNavigation} from '@react-navigation/native';
-import LoginForm, {FORM_TYPE} from './../../components/molecules/LoginForm';
+import LoginForm, {FORM_TYPE} from './../../components/organisms/LoginForm';
 
 const PhoneLoginScreen: React.FC = () => {
   const navigation = useNavigation();

@@ -1,20 +1,30 @@
-import React, {useRef, useLayoutEffect} from 'react';
+import React, {useState, useRef, useLayoutEffect} from 'react';
 import {View, Text, Button} from 'react-native';
 import styled from 'styled-components';
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {useQueryClient, MutationFunction} from '@tanstack/react-query';
 import {MainStackScreensParamList} from '../../lib/navigator/MainStackScreens';
 import AlertModal, {
   Handle as ModalHandle,
-} from '../../components/molecules/AlertModal';
+} from '../../components/organisms/AlertModal';
+import {createOne} from '../../lib/Firebase';
 import useQueries, {QUERY_KEY} from '../../hooks/useQueries';
-import UserList from '../../components/molecules/UserList';
+import useUser from '../../hooks/useUser';
+import UserList from '../../components/organisms/UserList';
+import PageModal from '../../components/organisms/PageModal';
+import EmailInput from '../../components/organisms/EmailInput';
 
 const UsersScreen: React.FC<Props> = ({navigation}) => {
+  const queryClient = useQueryClient();
+  const {useQueryUsers, useQueryMe, useMutaionUser} = useQueries();
   const modalRef = useRef<ModalHandle>(null);
-  const {useQueryUsers} = useQueries();
+  const mutation = useMutaionUser(queryClient, createOne as MutationFunction);
+  const {addUser, getUser} = useUser(mutation);
+  const {isLoading: isLoadingMe, data: me} = useQueryMe(QUERY_KEY.ME);
   const {isLoading: isLoadingUsers, data: users} = useQueryUsers(
     QUERY_KEY.USERS,
   );
+  const [visibleForModal, setVisibleForModal] = useState(false);
 
   useLayoutEffect(() => {
     navigation.setOptions({

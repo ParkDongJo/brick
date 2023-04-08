@@ -5,14 +5,14 @@ import {Controller, useForm} from 'react-hook-form';
 import {useQueryClient, MutationFunction} from '@tanstack/react-query';
 import {createOne} from '../../lib/Firebase';
 import BasicInput from '../../components/atoms/BasicInput';
-import {Rank} from '../../components/molecules/Chips';
+import {Rank} from '../../components/atoms/Chips';
 import useQueries from '../../hooks/useQueries';
 import useTodo from '../../hooks/useTodo';
 import {FormData} from '../../types';
-import Bagdes from '../../components/molecules/Bagdes';
-import PageModal from '../../components/molecules/PageModal';
+import Bagdes from '../../components/atoms/Bagdes';
+import PageModal from '../../components/organisms/PageModal';
 import TagsInput from '../../components/organisms/TagsInput';
-import RadioButtons from '../../components/molecules/RadioButtons';
+import RadioButtons from '../../components/organisms/RadioButtons';
 
 const TodoFormScreen = () => {
   const queryClient = useQueryClient();
@@ -163,7 +163,6 @@ const TodoFormScreen = () => {
           ]}
           onSelect={(rank: Rank) => {
             setValue('rank', rank);
-            console.log('dongjo rank', rank);
             setModalForRadioVisible(false);
           }}
           onCancel={() => {

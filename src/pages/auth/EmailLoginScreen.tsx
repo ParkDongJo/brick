@@ -3,7 +3,7 @@ import {useSetRecoilState} from 'recoil';
 import {View, ActivityIndicator} from 'react-native';
 import styled from 'styled-components';
 import {useNavigation} from '@react-navigation/native';
-import LoginForm, {FORM_TYPE} from './../../components/molecules/LoginForm';
+import LoginForm, {FORM_TYPE} from './../../components/organisms/LoginForm';
 import useAuth, {ResponseSignIn} from './../../hooks/useAuth';
 import useToast from './../../hooks/useToast';
 import {tokenAtom} from './../../store/atoms/auth';
