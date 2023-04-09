@@ -26,9 +26,12 @@ export type Todo = {
 };
 
 export type User = {
-  id: string;
+  uid: string;
   name: string;
   email: string;
   comment: string;
   profileUrl: string;
+  rolo: string;
+  managers: string[];
+  runners: string[];
 };

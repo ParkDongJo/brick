@@ -34,11 +34,26 @@ const UsersScreen: React.FC<Props> = ({navigation}) => {
     });
   }, [navigation]);
 
-  const navigateToForm = () => {
-    navigation.navigate('Todos');
+  const onClickAddButton = () => {
+    setVisibleForModal(true);
+  };
+  const addMyRunner = async (email: string) => {
+    const user = await getUser({
+      field: 'email',
+      operation: '==',
+      value: email,
+    });
+    // uid 를 넣어야함
+    user.managers.push(email);
+
+    addUser(user);
+
+    // me 에는 입력이 안되고 있음
+    me?.runners.push(email);
+    me && addUser(me);
   };
 
-  if (isLoadingUsers) {
+  if (isLoadingUsers && isLoadingMe) {
     return (
       <Container>
         <Text>Loading...</Text>
@@ -50,8 +65,20 @@ const UsersScreen: React.FC<Props> = ({navigation}) => {
     <Container>
       <UserList datas={users || []} />
       <Bottom>
-        <BottomButton title="추가하기" onPress={navigateToForm} />
+        <BottomButton title="추가하기" onPress={onClickAddButton} />
       </Bottom>
+      <PageModal
+        visible={visibleForModal}
+        close={() => setVisibleForModal(false)}>
+        <EmailInput
+          title={'매니징 할 사용자의 이메일 입력하세요.'}
+          onCancel={() => setVisibleForModal(false)}
+          onComplete={(email: string) => {
+            setVisibleForModal(false);
+            addMyRunner(email);
+          }}
+        />
+      </PageModal>
       <AlertModal ref={modalRef} />
     </Container>
   );

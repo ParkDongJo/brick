@@ -17,7 +17,7 @@ const UserList: React.FC<Props> = props => {
     <>
       {users.length ? (
         <FlatList
-          data={users}
+          data={datas}
           accessible={true}
           accessibilityRole={'list'}
           keyExtractor={data => data.id}
