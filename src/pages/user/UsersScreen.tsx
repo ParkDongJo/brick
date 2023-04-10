@@ -1,8 +1,12 @@
-import React, {useState, useRef, useLayoutEffect} from 'react';
+import React, {useEffect, useState, useRef, useLayoutEffect} from 'react';
 import {View, Text, Button} from 'react-native';
 import styled from 'styled-components';
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {useQueryClient, MutationFunction} from '@tanstack/react-query';
+import {
+  useQueryClient,
+  MutationFunction,
+  focusManager,
+} from '@tanstack/react-query';
 import {MainStackScreensParamList} from '../../lib/navigator/MainStackScreens';
 import AlertModal, {
   Handle as ModalHandle,
@@ -10,6 +14,7 @@ import AlertModal, {
 import {createOne} from '../../lib/Firebase';
 import useQueries, {QUERY_KEY} from '../../hooks/useQueries';
 import useUser from '../../hooks/useUser';
+import useAuth from '../../hooks/useAuth';
 import UserList from '../../components/organisms/UserList';
 import PageModal from '../../components/organisms/PageModal';
 import EmailInput from '../../components/organisms/EmailInput';
@@ -19,10 +24,12 @@ const UsersScreen: React.FC<Props> = ({navigation}) => {
   const {useQueryUsers, useQueryMe, useMutaionUser} = useQueries();
   const modalRef = useRef<ModalHandle>(null);
   const mutation = useMutaionUser(queryClient, createOne as MutationFunction);
-  const {addUser, getUser} = useUser(mutation);
-  const {isLoading: isLoadingMe, data: me} = useQueryMe(QUERY_KEY.ME);
+  const {addUser, getUsers} = useUser(mutation);
+  const {getUid} = useAuth();
+  const {isLoading: isLoadingMe, data: me} = useQueryMe(QUERY_KEY.ME, getUid());
   const {isLoading: isLoadingUsers, data: users} = useQueryUsers(
     QUERY_KEY.USERS,
+    getUid(),
   );
   const [visibleForModal, setVisibleForModal] = useState(false);
 
@@ -38,22 +45,31 @@ const UsersScreen: React.FC<Props> = ({navigation}) => {
     setVisibleForModal(true);
   };
   const addMyRunner = async (email: string) => {
-    const user = await getUser({
+    if (!me) {
+      return;
+    }
+    const usersByEmail = await getUsers({
       field: 'email',
       operation: '==',
       value: email,
     });
-    // uid 를 넣어야함
-    user.managers.push(email);
+    const user = usersByEmail[0];
 
+    user.managers.push(me.uid);
     addUser(user);
-
-    // me 에는 입력이 안되고 있음
-    me?.runners.push(email);
-    me && addUser(me);
+    me.runners.push(user.uid);
+    addUser(me);
   };
 
-  if (isLoadingUsers && isLoadingMe) {
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      // https://tanstack.com/query/v4/docs/react/guides/window-focus-refetching
+      focusManager.setFocused(true);
+    });
+    return unsubscribe;
+  }, [navigation]);
+
+  if (isLoadingUsers || isLoadingMe) {
     return (
       <Container>
         <Text>Loading...</Text>
