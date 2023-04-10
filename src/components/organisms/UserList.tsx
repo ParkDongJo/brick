@@ -2,15 +2,15 @@ import React from 'react';
 import {FlatList, Text} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import UserRow from '../../components/atoms/UserRow';
-import {User} from '../../store/atoms/users';
+import {User} from '../../types';
 import users from '../../../fixtures/users';
 
 const UserList: React.FC<Props> = props => {
   const {datas} = props;
   const navigation = useNavigation();
 
-  const handleClickItem = (userId: string) => {
-    navigation.navigate('Todos', {userId});
+  const handleClickItem = (uid: string) => {
+    navigation.navigate('Todos', {uid});
   };
 
   return (
@@ -20,15 +20,15 @@ const UserList: React.FC<Props> = props => {
           data={datas}
           accessible={true}
           accessibilityRole={'list'}
-          keyExtractor={data => data.id}
+          keyExtractor={data => data.uid}
           renderItem={({item}: {item: User}) => (
             <UserRow
-              id={item.id}
+              id={item.uid}
               name={item.name}
               comment={item.comment}
               email={item.email}
               profileUrl={item.profileUrl}
-              onPress={() => handleClickItem(item.id)}
+              onPress={() => handleClickItem(item.uid)}
             />
           )}
         />

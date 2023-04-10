@@ -6,9 +6,10 @@ import {updateOne, removeOne} from '../../lib/Firebase';
 import TodoRow from '../atoms/TodoRow';
 import {Todo} from '../../store/atoms/todo';
 import useQueries from '../../hooks/useQueries';
-import todos from '../../../fixtures/todos';
+// import todos from '../../../fixtures/todos';
 
 const TodoList: React.FC<Props> = props => {
+  const {todos} = props;
   const queryClient = useQueryClient();
   const {useMutaionTodo} = useQueries();
   const updateMutation = useMutaionTodo(
