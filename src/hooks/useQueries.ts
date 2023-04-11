@@ -3,7 +3,11 @@ import {
   useMutation,
   QueryClient,
   MutationFunction,
+  UseQueryOptions,
 } from '@tanstack/react-query';
+import firestore, {
+  FirebaseFirestoreTypes,
+} from '@react-native-firebase/firestore';
 import {Todo, User} from '../types';
 import useAuth from './useAuth';
 import {
@@ -24,14 +28,31 @@ export const QUERY_KEY = {
 };
 
 const useQueries = () => {
-  const {getUid} = useAuth();
-  const getMe = () => ({userId: '111'});
-
   return {
-    useQueryTodos: () =>
-      useQuery<Todo[]>(['todos'], {
-        queryFn: () => fetchAll('todos'),
-      }),
+    useQueryTodos: (uid?: string) => {
+      if (!uid) {
+        return {isLoading: false, data: []};
+      }
+      return useQuery<Todo[]>(['todos'], {
+        queryFn: async () => {
+          try {
+            const snapshot = await firestore()
+              .collection('todos')
+              .doc(uid)
+              .collection('days')
+              .doc('2023-04-10')
+              .collection('ids')
+              .get();
+
+            return snapshot.docs.map(data => ({
+              ...data.data(),
+            })) as Todo[];
+          } catch (err) {
+            return [];
+          }
+        },
+      });
+    },
     useMutaionTodo: (queryClient: QueryClient, fn: MutationFunction) =>
       useMutation({
         mutationFn: fn,
@@ -40,8 +61,7 @@ const useQueries = () => {
           queryClient.invalidateQueries({queryKey: [QUERY_KEY.TODOS]});
         },
       }),
-    useQueryUsers: (key: typeof QUERY_KEY.USERS) => {
-      const uid = getUid();
+    useQueryUsers: (key: typeof QUERY_KEY.USERS, uid?: string) => {
       if (!uid) {
         return {isLoading: false, data: null};
       }
@@ -71,13 +91,13 @@ const useQueries = () => {
           queryClient.invalidateQueries({queryKey: [QUERY_KEY.USERS]});
         },
       }),
-    useQueryMe: (key: typeof QUERY_KEY.ME) => {
-      const uid = getUid();
-      if (!uid) {
+    useQueryMe: (key: typeof QUERY_KEY.ME, myUid: string) => {
+      if (!myUid) {
         return {isLoading: false, data: null};
       }
       return useQuery<User>([key], {
-        queryFn: () => fetchOne({collection: key, docId: uid}) as Promise<User>,
+        queryFn: () =>
+          fetchOne({collection: 'users', docId: myUid}) as Promise<User>,
       });
     },
   };
