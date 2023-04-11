@@ -9,10 +9,11 @@ import AlertModal, {
 import useQueries from '../../hooks/useQueries';
 import TodoList from '../../components/organisms/TodoList';
 
-const TodosScreen: React.FC<Props> = ({navigation}) => {
+const TodosScreen: React.FC<Props> = ({route, navigation}) => {
+  const {uid} = route.params;
   const modalRef = useRef<ModalHandle>(null);
   const {useQueryTodos} = useQueries();
-  const {isLoading: isLoadingTodos, data: todos} = useQueryTodos();
+  const {isLoading: isLoadingTodos, data: todos} = useQueryTodos(uid);
 
   useLayoutEffect(() => {
     navigation.setOptions({
