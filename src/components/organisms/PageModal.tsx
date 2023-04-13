@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Modal} from 'react-native';
+import {View, Modal, Button} from 'react-native';
 import styled from 'styled-components';
 
 const PageModal: React.FC<Props> = props => {
@@ -14,7 +14,12 @@ const PageModal: React.FC<Props> = props => {
         close();
       }}>
       <Container>
-        <Center>{children}</Center>
+        <Center>
+          <Header>
+            <Button title="취소" onPress={close} />
+          </Header>
+          {children}
+        </Center>
       </Container>
     </Modal>
   );
@@ -56,4 +61,10 @@ const Center = styled(View)`
     shadow-opacity: 0.15;
     shadow-radius: 4px;
     elevation: 5;
+`;
+const Header = styled(View)`
+  width: 100%;
+  height: 70px;
+  flex-direction: row;
+  justify-content: space-between;
 `;

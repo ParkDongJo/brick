@@ -6,7 +6,6 @@ const RadioButtons: React.FC<Props> = ({
   defaultValue = undefined,
   datas,
   onSelect,
-  onCancel,
 }) => {
   const [selected, setSelected] = useState(defaultValue);
 
@@ -14,15 +13,9 @@ const RadioButtons: React.FC<Props> = ({
     setSelected(value === selected ? defaultValue : value);
     onSelect?.(value);
   };
-  const cancel = () => {
-    onCancel?.();
-  };
 
   return (
     <>
-      <Header>
-        <Button title="취소" onPress={cancel} />
-      </Header>
       {datas.map((data, index) => {
         const {title, value} = data;
         return (
@@ -44,16 +37,8 @@ type Props = {
   defaultValue?: string | number;
   datas: Radio[];
   onSelect?(value: string | number): void;
-  onCancel?(): void;
 };
 type Radio = {
   title: string;
   value: string | number;
 };
-
-const Header = styled(View)`
-  width: 100%;
-  height: 70px;
-  flex-direction: row;
-  justify-content: space-between;
-`;

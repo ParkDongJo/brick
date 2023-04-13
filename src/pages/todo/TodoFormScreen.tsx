@@ -146,9 +146,6 @@ const TodoFormScreen = () => {
             setValue('tags', tags);
             setModalForTagsVisible(false);
           }}
-          onCancel={() => {
-            setModalForTagsVisible(false);
-          }}
         />
       </PageModal>
       <PageModal
@@ -163,9 +160,6 @@ const TodoFormScreen = () => {
           ]}
           onSelect={(rank: Rank) => {
             setValue('rank', rank);
-            setModalForRadioVisible(false);
-          }}
-          onCancel={() => {
             setModalForRadioVisible(false);
           }}
         />
