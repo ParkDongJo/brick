@@ -1,11 +1,11 @@
 import React from 'react';
 import {Text} from 'react-native';
 import {Controller, Control, FieldErrors} from 'react-hook-form';
-import BasicInput from '../../components/atoms/BasicInput';
+import BasicInput from '../atoms/BasicInput';
 import useLoginForm from '../../hooks/useLoginForm';
 import {FormData} from './LoginForm';
 
-const LoginEmailForm: React.FC<Props> = props => {
+const EmailPwdForm: React.FC<Props> = props => {
   const {control, errors} = props;
   const {emailPattern, pwdPattern} = useLoginForm();
 
@@ -47,7 +47,7 @@ const LoginEmailForm: React.FC<Props> = props => {
     </>
   );
 };
-export default LoginEmailForm;
+export default EmailPwdForm;
 
 type Props = {
   control: Control<FormData, any>;

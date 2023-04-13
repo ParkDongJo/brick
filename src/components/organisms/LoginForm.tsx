@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import {useForm} from 'react-hook-form';
 import BasicButton from '../../components/atoms/BasicButton';
 import useToast from '../../hooks/useToast';
-import LoginEmailForm from './LoginEmailForm';
+import EmailPwdForm from './EmailPwdForm';
 import LoginPhoneForm from './LoginPhoneForm';
 
 const LoginForm: React.FC<Props> = props => {
@@ -36,7 +36,7 @@ const LoginForm: React.FC<Props> = props => {
   return (
     <Container>
       {type === FORM_TYPE.email ? (
-        <LoginEmailForm control={control} errors={errors} />
+        <EmailPwdForm control={control} errors={errors} />
       ) : (
         <LoginPhoneForm control={control} errors={errors} />
       )}

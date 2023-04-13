@@ -12,10 +12,14 @@ const LoginScreen: React.FC = () => {
   const moveToPhoneLogin = () => {
     navigation.navigate('PhoneLogin');
   };
+  const moveToSignup = () => {
+    navigation.navigate('EmailSignup');
+  };
   return (
     <Container>
       <BasicButton title={'이메일로 로그인'} onPress={moveToEmailLogin} />
       <BasicButton title={'전화번호로 로그인'} onPress={moveToPhoneLogin} />
+      <BasicButton title={'이메일 회원가입'} onPress={moveToSignup} />
     </Container>
   );
 };
