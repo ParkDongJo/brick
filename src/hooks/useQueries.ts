@@ -91,7 +91,7 @@ const useQueries = () => {
           queryClient.invalidateQueries({queryKey: [QUERY_KEY.USERS]});
         },
       }),
-    useQueryMe: (key: typeof QUERY_KEY.ME, myUid: string) => {
+    useQueryMe: (key: typeof QUERY_KEY.ME, myUid?: string) => {
       if (!myUid) {
         return {isLoading: false, data: null};
       }
