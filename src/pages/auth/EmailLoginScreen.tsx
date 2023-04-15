@@ -1,18 +1,15 @@
 import React, {Suspense} from 'react';
-import {useSetRecoilState} from 'recoil';
 import {View, ActivityIndicator} from 'react-native';
 import styled from 'styled-components';
 import {useNavigation} from '@react-navigation/native';
 import LoginForm, {FORM_TYPE} from './../../components/organisms/LoginForm';
 import useAuth, {AuthResponse} from './../../hooks/useAuth';
 import useToast from './../../hooks/useToast';
-import {tokenAtom} from './../../store/atoms/auth';
 import useQueries, {QUERY_KEY} from '../../hooks/useQueries';
 import {Role} from '../../constants';
 
 const EmailLoginScreen: React.FC = () => {
   const navigation = useNavigation();
-  const setToken = useSetRecoilState(tokenAtom);
   const {signInEmail} = useAuth();
   const {show: showToast} = useToast();
   const {getUid} = useAuth();
@@ -30,8 +27,6 @@ const EmailLoginScreen: React.FC = () => {
       return;
     }
 
-    const token = await resp.data.getIdToken();
-    setToken(token);
     if (me?.role === Role.manager) {
       navigation.navigate('Index');
     } else {
