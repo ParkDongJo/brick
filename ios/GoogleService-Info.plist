@@ -3,9 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>1007017194525-2i0ke2t5ajunfed0gl5tv2n57jj5t105.apps.googleusercontent.com</string>
+	<string>1007017194525-is59jm1pe8p4dte27eq7v81dl0qkqa7h.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1007017194525-2i0ke2t5ajunfed0gl5tv2n57jj5t105</string>
+	<string>com.googleusercontent.apps.1007017194525-is59jm1pe8p4dte27eq7v81dl0qkqa7h</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>1007017194525-gjuof2koi20prvi81b0ur1848qj6ei7a.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyCarMXNZeaXVd-I5RpZMTfoLtDFTUgyrow</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.brick.your-care</string>
+	<string>com.peng.yourcare</string>
 	<key>PROJECT_ID</key>
 	<string>your-care-8ba48</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1007017194525:ios:c83d07318405fb482a02f4</string>
+	<string>1:1007017194525:ios:b6d544a0316517702a02f4</string>
 </dict>
 </plist>
