@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "1007017194525",
+    "project_id": "your-care-8ba48",
+    "storage_bucket": "your-care-8ba48.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1007017194525:android:6aca506e361fa2952a02f4",
+        "android_client_info": {
+          "package_name": "com.yourcare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1007017194525-ok3emoiunr0jqvpsvdompvu7shnr4hfc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yourcare",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "1007017194525-6d90t4j2kjpj9vhi7a8o5dhm2krejq1v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhOYApV3UaU0jGy4LMAeOORnTwdxS9KBI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1007017194525-6d90t4j2kjpj9vhi7a8o5dhm2krejq1v.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1007017194525-2i0ke2t5ajunfed0gl5tv2n57jj5t105.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.brick.your-care"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
