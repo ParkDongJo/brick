@@ -6,6 +6,12 @@ import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import {NavigationContainer} from '@react-navigation/native';
 import AppStackScreens from './lib/navigator/AppStackScreens';
 import Toast from './components/atoms/Toast';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
+
+GoogleSignin.configure({
+  webClientId:
+    '1007017194525-6d90t4j2kjpj9vhi7a8o5dhm2krejq1v.apps.googleusercontent.com',
+});
 
 const queryClient = new QueryClient();
 
