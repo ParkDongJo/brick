@@ -1,17 +1,27 @@
 const users = [
   {
-    id: 'user1',
+    uid: 'user1',
     name: 'charles',
     comment: 'he is my freind',
     email: 'dongjo@gmail.com',
-    profileUrl: 'https://dongjo.pro',
+    profileUrl: 'cat_icon.png',
+    avatar: 'rabit',
+    role: 'manager',
+    gender: 'male',
+    managers: [],
+    runners: [],
   },
   {
-    id: 'user2',
+    uid: 'user2',
     name: 'charles',
     comment: 'he is my freind',
     email: 'dongjo@gmail.com',
-    profileUrl: 'https://dongjo.pro',
+    profileUrl: 'cat',
+    avatar: 'cat',
+    role: 'manager',
+    gender: 'male',
+    managers: [],
+    runners: [],
   },
 ];
 export default users;
