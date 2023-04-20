@@ -4,12 +4,14 @@ import styled from 'styled-components';
 import {useQueryClient, MutationFunction} from '@tanstack/react-query';
 import {updateOne, removeOne} from '../../lib/Firebase';
 import TodoRow from '../atoms/TodoRow';
-import {Todo} from '../../store/atoms/todo';
+import {Todo} from '../../types';
 import useQueries from '../../hooks/useQueries';
+import {useNavigation} from '@react-navigation/native';
 // import todos from '../../../fixtures/todos';
 
 const TodoList: React.FC<Props> = props => {
   const {todos} = props;
+  const navigation = useNavigation();
   const queryClient = useQueryClient();
   const {useMutaionTodo} = useQueries();
   const updateMutation = useMutaionTodo(
@@ -22,11 +24,7 @@ const TodoList: React.FC<Props> = props => {
   );
 
   const onClickItem = (todo: Todo) => {
-    updateMutation.mutate({
-      collection: 'todos',
-      docId: todo.id,
-      data: {...todo, isChecked: true},
-    });
+    navigation.navigate('TodoForm', {...todo});
   };
   const onClickDeleteBtn = (todoId: string) => {
     removeMutation.mutate({
