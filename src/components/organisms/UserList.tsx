@@ -6,7 +6,7 @@ import {User} from '../../types';
 import users from '../../../fixtures/users';
 
 const UserList: React.FC<Props> = props => {
-  const {datas} = props;
+  const {datas, isHorizontal = true} = props;
   const navigation = useNavigation();
 
   const handleClickItem = (uid: string) => {
@@ -21,6 +21,8 @@ const UserList: React.FC<Props> = props => {
           accessible={true}
           accessibilityRole={'list'}
           keyExtractor={data => data.uid}
+          bounces={false}
+          horizontal={isHorizontal}
           renderItem={({item}: {item: User}) => (
             <UserRow
               id={item.uid}
@@ -28,6 +30,8 @@ const UserList: React.FC<Props> = props => {
               comment={item.comment}
               email={item.email}
               profileUrl={item.profileUrl}
+              avatar={item.avatar}
+              role={item.role}
               onPress={() => handleClickItem(item.uid)}
             />
           )}
@@ -42,4 +46,5 @@ export default UserList;
 
 type Props = {
   datas: User[];
+  isHorizontal: boolean;
 };
