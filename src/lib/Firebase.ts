@@ -48,9 +48,6 @@ export const fetchOne = async ({
       .doc(docId)
       .get();
 
-    if (docSnapshot.exists) {
-      return null;
-    }
     return docSnapshot.data() || {};
   } catch (err) {
     return null;
