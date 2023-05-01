@@ -1,9 +1,9 @@
 import React from 'react';
-import {View, Modal, Button} from 'react-native';
+import {View, Modal, Button, SafeAreaView} from 'react-native';
 import styled from 'styled-components';
 
 const PageModal: React.FC<Props> = props => {
-  const {visible, children, close} = props;
+  const {visible, children, hasHeader = true, close} = props;
 
   return (
     <Modal
@@ -11,13 +11,15 @@ const PageModal: React.FC<Props> = props => {
       transparent={true}
       visible={visible}
       onRequestClose={() => {
-        close();
+        close?.();
       }}>
       <Container>
         <Center>
-          <Header>
-            <Button title="취소" onPress={close} />
-          </Header>
+          {hasHeader && (
+            <Header>
+              <Button title="취소" onPress={close} />
+            </Header>
+          )}
           {children}
         </Center>
       </Container>
@@ -33,22 +35,20 @@ export type Handle = {
 };
 type Props = {
   visible: boolean;
+  hasHeader?: boolean;
   children: React.ReactNode;
-  close(): void;
+  close?(): void;
 };
 
-const Container = styled(View)`
+const Container = styled(SafeAreaView)`
   width: 100%;
-  flex: 1;
+  height: 100%;
   justify-content: center;
   align-items: center;
-  margin-top: 50px;
 `;
 
 const Center = styled(View)`
     width: 100%;
-    height: 100%;
-    margin: 20px;
     backgroundColor: white;
     borderRadius: 20px;
     padding: 10px 20px;
@@ -64,7 +64,7 @@ const Center = styled(View)`
 `;
 const Header = styled(View)`
   width: 100%;
-  height: 70px;
+  height: 50px;
   flex-direction: row;
   justify-content: space-between;
 `;
