@@ -15,12 +15,14 @@ const PageModal: React.FC<Props> = props => {
       }}>
       <Container>
         <Center>
-          {hasHeader && (
-            <Header>
-              <Button title="취소" onPress={close} />
-            </Header>
-          )}
-          {children}
+          <Body>
+            {hasHeader && (
+              <Header>
+                <Button title="취소" onPress={close} />
+              </Header>
+            )}
+            {children}
+          </Body>
         </Center>
       </Container>
     </Modal>
@@ -58,7 +60,7 @@ const Center = styled(View)`
         width: 0px,
         height: 1px
     };
-    shadow-opacity: 0.15;
+    shadow-opacity: 0.09;
     shadow-radius: 4px;
     elevation: 5;
 `;
@@ -67,4 +69,8 @@ const Header = styled(View)`
   height: 50px;
   flex-direction: row;
   justify-content: space-between;
+`;
+const Body = styled(View)`
+  width: 100%;
+  height: 100%;
 `;
