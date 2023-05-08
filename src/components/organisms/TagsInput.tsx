@@ -1,9 +1,8 @@
 import React from 'react';
-import {View, Button} from 'react-native';
-import styled from 'styled-components';
+import {Button} from 'react-native';
 import {Controller, useForm} from 'react-hook-form';
 import BasicInput from '../atoms/BasicInput';
-import Bagdes from '../atoms/Bagdes';
+import Badges from '../atoms/Badges';
 import useTodo from '../../hooks/useTodo';
 
 const TagsInput: React.FC<Props> = props => {
@@ -37,7 +36,7 @@ const TagsInput: React.FC<Props> = props => {
         rules={{
           required: false,
         }}
-        render={({field: {value}}) => <Bagdes labels={convertTags(value)} />}
+        render={({field: {value}}) => <Badges labels={convertTags(value)} />}
         name="tags"
       />
       <Controller

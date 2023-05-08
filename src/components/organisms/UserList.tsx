@@ -46,5 +46,5 @@ export default UserList;
 
 type Props = {
   datas: User[];
-  isHorizontal: boolean;
+  isHorizontal?: boolean;
 };

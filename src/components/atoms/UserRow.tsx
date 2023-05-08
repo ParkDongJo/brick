@@ -40,9 +40,8 @@ type Props = {
 };
 const Container = styled(View)`
   widht: 60px;
-  height: 50px;
   items-align: center;
-  margin: 10px;
+  margin-left: 10px;
   justify-content: center;
 `;
 const ProfileImg = styled(Image)`
