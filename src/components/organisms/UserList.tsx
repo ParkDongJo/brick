@@ -3,14 +3,17 @@ import {FlatList, Text} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import UserRow from '../../components/atoms/UserRow';
 import {User} from '../../types';
+import {Role} from '../../constants';
 import users from '../../../fixtures/users';
 
 const UserList: React.FC<Props> = props => {
   const {datas, isHorizontal = true} = props;
   const navigation = useNavigation();
 
-  const handleClickItem = (uid: string) => {
-    navigation.navigate('Todos', {uid});
+  const handleClickItem = (user: User) => {
+    console.log('dongjo ', user.role);
+    const path: string = user.role === Role.manager ? 'Profile' : 'Runner';
+    navigation.navigate(path as never, {uid: user.uid});
   };
 
   return (
@@ -32,7 +35,7 @@ const UserList: React.FC<Props> = props => {
               profileUrl={item.profileUrl}
               avatar={item.avatar}
               role={item.role}
-              onPress={() => handleClickItem(item.uid)}
+              onPress={() => handleClickItem(item)}
             />
           )}
         />
