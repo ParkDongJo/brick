@@ -1,13 +1,9 @@
-import {UseMutationResult, useQueries} from '@tanstack/react-query';
+import {UseMutationResult} from '@tanstack/react-query';
 import moment from 'moment';
-import {FormData, User} from '../types';
-import useAuth from './useAuth';
+import {User} from '../types';
 import {fetchAllByWhere, WhereQuery} from '../lib/Firebase';
-import {QUERY_KEY} from '../hooks/useQueries';
 
 const useUser = (mutation?: UseMutationResult) => {
-  const {getUid} = useAuth();
-
   const getUsers = async (where: WhereQuery) => {
     const data = (await fetchAllByWhere({
       collection: 'users',
@@ -15,10 +11,17 @@ const useUser = (mutation?: UseMutationResult) => {
     })) as unknown as User[];
     return data;
   };
-  const addUser = (data: User) => {
+  const addUser = (key: string, data: User) => {
     mutation?.mutate({
       collection: 'users',
-      docKey: getUid(),
+      docKey: key,
+      data: data,
+    });
+  };
+  const createUser = (key: string, data: User) => {
+    mutation?.mutate({
+      collection: 'users',
+      docKey: key,
       data: data,
     });
   };
@@ -26,6 +29,7 @@ const useUser = (mutation?: UseMutationResult) => {
   return {
     getUsers,
     addUser,
+    createUser,
   };
 };
 export default useUser;

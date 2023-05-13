@@ -1,17 +1,20 @@
 import {useEffect, useRef} from 'react';
-import {useRecoilState} from 'recoil';
-import {toastStateAtom} from './../store/atoms/global';
 import {Animated} from 'react-native';
+import useToastStore from '../store/useToastStore';
 
 const FADEIN_DURATION = 700;
 const FADEOUT_DURATION = 700;
 
 const useToast = () => {
-  const [toastState, setToastState] = useRecoilState(toastStateAtom);
+  const [toast, setToast] = useToastStore(state => [
+    state.toast,
+    state.setToast,
+  ]);
+
   const opacityAni = useRef(new Animated.Value(0)).current;
 
   const show = (text: string) => {
-    setToastState({
+    setToast({
       isShow: true,
       text,
     });
@@ -28,7 +31,7 @@ const useToast = () => {
   };
 
   const startFadeOut = (delay = DURATION.LENGTH_SHORT) => {
-    if (!toastState.isShow) {
+    if (!toast.isShow) {
       return;
     }
 
@@ -38,22 +41,22 @@ const useToast = () => {
         duration: FADEOUT_DURATION,
         useNativeDriver: true,
       }).start(() => {
-        setToastState({...toastState, isShow: false});
+        setToast({...toast, isShow: false});
       });
     }, delay);
   };
 
   useEffect(() => {
-    const {isShow, text} = toastState;
+    const {isShow, text} = toast;
     if (isShow && text) {
       startFadeIn();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [toastState]);
+  }, [toast]);
 
   return {
-    isShow: toastState.isShow,
-    text: toastState.text,
+    isShow: toast.isShow,
+    text: toast.text,
     opacityAni,
     show,
     startFadeIn,
