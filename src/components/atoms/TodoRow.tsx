@@ -17,7 +17,7 @@ import useIcon from '../../hooks/useIcon';
 import StyledText from './StyledText';
 import ProfileImage from '../../components/atoms/ProfileImage';
 
-const TodoRow: React.FC<Props> = ({datas, onPressCheck, onPressDelete}) => {
+const TodoRow: React.FC<Props> = ({datas, onPressCheck}) => {
   const {title, memo, time, tags, rank} = datas;
   const [isChecked, setIsChecked] = useState(false);
   const {convertTags} = useTodo();
@@ -26,10 +26,7 @@ const TodoRow: React.FC<Props> = ({datas, onPressCheck, onPressDelete}) => {
     setIsChecked(!isChecked);
     onPressCheck();
   };
-  const handleClickDeleteBtn = (event: GestureResponderEvent) => {
-    event?.preventDefault();
-    onPressDelete();
-  };
+
   const getRankData = (value: number) => {
     return {
       1: {
@@ -81,7 +78,6 @@ export default TodoRow;
 export type Props = {
   datas: Todo;
   onPressCheck(): void;
-  onPressDelete(): void;
 };
 
 const Container = styled(View)`

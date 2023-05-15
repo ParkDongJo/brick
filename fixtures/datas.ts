@@ -6,8 +6,13 @@ const datas = {
       email: 'dongjo@gmail.com',
       comment: 'he is my freind',
       profileUrl: 'https://dongjo.pro',
+      gender: 'male',
       runners: ['key_user2', 'key_user3'],
       managers: [],
+      targets: [
+        {id: '3333', title: 'title1'},
+        {id: '4444', title: 'title2'},
+      ],
     },
     key_user2: {
       name: 'charles',
@@ -15,8 +20,13 @@ const datas = {
       email: 'dongjo@gmail.com',
       comment: 'he is my freind',
       profileUrl: 'https://dongjo.pro',
+      gender: 'male',
       runners: [],
       managers: ['key_user1'],
+      targets: [
+        {id: '1111', title: 'title1'},
+        {id: '2222', title: 'title2'},
+      ],
     },
     key_user3: {
       name: 'charles',
@@ -26,6 +36,7 @@ const datas = {
       profileUrl: 'https://dongjo.pro',
       runners: [],
       managers: ['key_user1'],
+      targets: [],
     },
   },
   todos: {
@@ -36,6 +47,7 @@ const datas = {
           id: '2023-04-06todo1',
           userId: 'key_user2',
           managerId: 'key_user1',
+          target: {id: '1111', title: 'title1'},
           title: 'test',
           memo: 'test',
           tags: '#work #study',
@@ -52,6 +64,7 @@ const datas = {
           id: '2023-04-06todo2',
           userId: 'key_user2',
           managerId: 'key_user1',
+          target: {id: '2222', title: 'title2'},
           title: 'test',
           memo: 'test',
           tags: '#work #study',
@@ -64,12 +77,11 @@ const datas = {
           createdAt: '2021-04-06',
           deadlineAt: '2023-04-06',
         },
-      ],
-      '2023-04-07': [
         {
-          id: '2023-04-07todo1',
+          id: '2023-04-06todo3',
           userId: 'key_user2',
           managerId: 'key_user1',
+          target: {id: '2222', title: 'title2'},
           title: 'test',
           memo: 'test',
           tags: '#work #study',
@@ -82,6 +94,8 @@ const datas = {
           createdAt: '2021-04-06',
           deadlineAt: '2023-04-06',
         },
+      ],
+      '2023-04-07': [
         {
           id: '2023-04-07todo2',
           userId: 'key_user2',

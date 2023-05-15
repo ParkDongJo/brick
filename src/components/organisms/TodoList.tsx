@@ -26,12 +26,7 @@ const TodoList: React.FC<Props> = props => {
   const onClickItem = (todo: Todo) => {
     navigation.navigate('TodoForm', {...todo});
   };
-  const onClickDeleteBtn = (todoId: string) => {
-    removeMutation.mutate({
-      collection: 'todos',
-      docId: todoId,
-    });
-  };
+
   return (
     <Container>
       {todos.length ? (
@@ -41,11 +36,7 @@ const TodoList: React.FC<Props> = props => {
           accessibilityRole={'list'}
           keyExtractor={todo => todo.id}
           renderItem={({item}: {item: Todo}) => (
-            <TodoRow
-              datas={item}
-              onPressCheck={() => onClickItem(item)}
-              onPressDelete={() => onClickDeleteBtn(item.id)}
-            />
+            <TodoRow datas={item} onPressCheck={() => onClickItem(item)} />
           )}
         />
       ) : (

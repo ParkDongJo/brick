@@ -15,20 +15,30 @@ import HorizontalList from '../../components/hof/HorizontalList';
 import auth from '@react-native-firebase/auth';
 import CalendarForWeek from '../../components/templates/CalendarForWeek';
 import PageModal from '../../components/organisms/PageModal';
-import CalendarForMonth from '../../components/templates/CalendarForMonth';
-import EmailInput from '../../components/organisms/AddUser';
-import UserSections from '../../components/organisms/UserSections';
+import Calendar from '../../components/organisms/Calendar';
+import FilterButton from '../../components/atoms/FilterButton';
+import FilterSet from '../../components/organisms/FilterSet';
 import datas from '../../../fixtures/datas';
+import useCalendarStore from '../../store/useCalendarStore';
+import TodoSections from '../../components/organisms/TodoSections';
+import useTodo from '../../hooks/useTodo';
 
 const TodosScreen: React.FC<Props> = ({navigation}) => {
   const modalRef = useRef<ModalHandle>(null);
   const {useQueryTodos} = useQueries();
+  const [selectedDate, setSelectedDate] = useCalendarStore(state => [
+    state.selectedDate,
+    state.setSelectedDate,
+  ]);
   const [modalForCalendar, setModalForCalendar] = useState(false);
   const [modalForAddUser, setModalForAddUser] = useState(false);
   const [modalForUsers, setModalForUsers] = useState(false);
-  const {isLoading: isLoadingTodos, data: todos} = useQueryTodos(
+  const [modalForFilter, setModalForFilter] = useState(false);
+
+  const {isLoading: isLoadingTodos, data: _todos} = useQueryTodos(
     auth().currentUser?.uid,
   );
+  const {mergeTodoByTitle} = useTodo();
 
   const closeModalForCalendar = () => {
     setModalForCalendar(false);
@@ -42,14 +52,21 @@ const TodosScreen: React.FC<Props> = ({navigation}) => {
   const openModalForAddUser = () => {
     setModalForAddUser(true);
   };
-  const closeModalForUsers = () => {
-    setModalForUsers(false);
+  const openModalForFilter = () => {
+    setModalForFilter(true);
+  };
+  const closeModalForFilte = () => {
+    setModalForFilter(false);
   };
   const openModalForUsers = () => {
     navigation.push('Users');
   };
   const navigateToForm = () => {
     navigation.navigate('TodoForm');
+  };
+  const onPressDayInCalendar = (date: string) => {
+    setSelectedDate(date);
+    closeModalForCalendar();
   };
 
   useLayoutEffect(() => {
@@ -87,52 +104,39 @@ const TodosScreen: React.FC<Props> = ({navigation}) => {
       </Head>
       <CalendarForWeek onPressHead={openModalForCalendar} />
       <Body>
-        <TodoList todos={datas.todos.key_user2['2023-04-06'] || []} />
+        <BodyHead>
+          <FilterButton onPress={openModalForFilter} />
+          <FilterButton title={'추가'} icon={' +'} onPress={navigateToForm} />
+        </BodyHead>
+        <TodoSections
+          datas={mergeTodoByTitle(datas.todos.key_user2['2023-04-06'] || [])}
+        />
       </Body>
-      <Bottom>
-        <BottomButton title="추가하기" onPress={navigateToForm} />
-      </Bottom>
       <AlertModal ref={modalRef} />
-      <PageModal visible={modalForCalendar} close={closeModalForCalendar}>
-        <CalendarForMonth />
-      </PageModal>
-      {/* <PageModal
-        visible={modalForAddUser}
-        hasHeader={false}
-        close={closeModalForAddUser}>
-        <EmailInput
-          title={'추가할 사용자의 이메일 입력하세요.'}
-          onCancel={closeModalForAddUser}
-          onComplete={(email: string) => {
-            openModalForAddUser();
-          }}
-        />
-      </PageModal> */}
-      {/* <PageModal visible={modalForUsers} close={closeModalForUsers}>
-        <EmailInput
-          title={'추가할 사용자의 이메일 입력하세요.'}
-          onCancel={closeModalForUsers}
-          onComplete={(email: string) => {
-            openModalForAddUser();
-          }}
-        />
-        <UserSections
+      <PageModal visible={modalForFilter} close={closeModalForFilte}>
+        <FilterSet
+          title={'정렬기준'}
           datas={[
-            {
-              title: '코치목록',
-              data: users,
-            },
-            {
-              title: '선수목록',
-              data: users,
-            },
-            {
-              title: '친구목록',
-              data: users,
-            },
+            {title: '시간순', value: 0},
+            {title: '중요도순', value: 1},
           ]}
+          onSelect={() => {}}
         />
-      </PageModal> */}
+        <FilterSet
+          title={'진행상황'}
+          datas={[
+            {title: '전체', value: 0},
+            {title: '대기', value: 1},
+            {title: '진행중', value: 2},
+            {title: '완료', value: 3},
+            {title: '확인', value: 4},
+          ]}
+          onSelect={() => {}}
+        />
+      </PageModal>
+      <PageModal visible={modalForCalendar} close={closeModalForCalendar}>
+        <Calendar onPressDay={onPressDayInCalendar} />
+      </PageModal>
     </Container>
   );
 };
@@ -145,6 +149,11 @@ const Container = styled(View)`
   height: 100%;
 `;
 const Head = styled(View)``;
+const BodyHead = styled(View)`
+  padding: 0px 20px;
+  flex-direction: row;
+  background-color: #fff;
+`;
 const Body = styled(View)`
   height: 100%;
 `;
