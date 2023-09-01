@@ -23,11 +23,16 @@ const UserSections: React.FC<Props> = props => {
             onPress={() => {}}
           />
         )}
-        renderSectionHeader={({section: {title, data}}) => (
-          <Head>
-            <Text style={{fontSize: 15}}>{`${title} (${data.length})`}</Text>
-          </Head>
-        )}
+        renderSectionHeader={({section}) => {
+          const index = datas.indexOf(section);
+          const {title, data} = section;
+
+          return (
+            <Head paddingTop={index === 0 ? 10 : 20}>
+              <Title>{`${title} (${data.length})`}</Title>
+            </Head>
+          );
+        }}
       />
     </Container>
   );
@@ -35,7 +40,7 @@ const UserSections: React.FC<Props> = props => {
 export default UserSections;
 
 type Props = {
-  datas: {title: string; data: User[]};
+  datas: {title: string; data: User[]}[];
 };
 const Container = styled(View)`
   width: 100%;
@@ -43,13 +48,17 @@ const Container = styled(View)`
   padding: 10px 20px;
   border-radius: 10px;
 `;
-const Head = styled(View)`
+const Head = styled(View)<{paddingTop: number}>`
   width: 100%;
-  height: 30px;
+  padding: ${props => props.paddingTop || 20}px 0px 10px 0px;
+  margin-bottom: 15px;
   flex-direction: row;
   align-items: center;
   border-bottom-width: 0.5px;
   border-bottom-color: #ccc;
   background-color: #fff;
 `;
-const Body = styled(View)``;
+const Title = styled(Text)`
+  font-size: 15px;
+  font-weight: bold;
+`;

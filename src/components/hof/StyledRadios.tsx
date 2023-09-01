@@ -2,26 +2,19 @@ import React from 'react';
 import {StyleSheet, Pressable, View, Text} from 'react-native';
 import styled from 'styled-components';
 
-const HorizontalList: React.FC<Props> = props => {
+const StyledRadios: React.FC<Props> = props => {
   const {children, onPressAll} = props;
 
   return (
     <Container>
-      <Header>
-        <Pressable onPress={onPressAll}>
-          <Text style={styles.textButton}>{'더보기'}</Text>
-        </Pressable>
-      </Header>
       <List>{React.cloneElement(children, {isHorizontal: true})}</List>
     </Container>
   );
 };
-export default HorizontalList;
+export default StyledRadios;
 
 type Props = {
   children: React.ReactElement;
-  onPressAddBtn: () => void;
-  onPressAll: () => void;
 };
 
 const Container = styled(View)`

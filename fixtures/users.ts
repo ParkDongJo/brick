@@ -18,7 +18,7 @@ const users = [
     email: 'dongjo@gmail.com',
     profileUrl: 'cat',
     avatar: 'cat',
-    role: 'manager',
+    role: 'runner',
     gender: 'male',
     managers: [],
     runners: [],

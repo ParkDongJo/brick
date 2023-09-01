@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {View, Text, Pressable, Dimensions} from 'react-native';
 import moment from 'moment';
 import styled from 'styled-components';
+import useCalendarStore from '../../store/useCalendarStore';
 
 const cols = 7;
 const marginHorizontal = 2;
@@ -9,8 +10,10 @@ const marginVertical = 2;
 const width =
   Dimensions.get('window').width / cols - marginHorizontal * (cols + 1);
 
-const Calendar = () => {
-  const [currentDate, setCurrentDate] = useState(moment());
+const Calendar: React.FC<Props> = props => {
+  const {onPressDay} = props;
+  const [selectedDate] = useCalendarStore(state => [state.selectedDate]);
+  const [currentDate, setCurrentDate] = useState(moment(selectedDate));
   const [weeks, setWeeks] = useState([]);
 
   useEffect(() => {
@@ -33,11 +36,29 @@ const Calendar = () => {
           week.push(<Day key={`${row}-${col}`} />);
         } else {
           const currentDay = day;
+          console.log(
+            'dongjo currentDate ',
+            moment(currentDate).format('YYYY-MM'),
+          );
+          console.log('dongjo selectedDate ', selectedDate);
           week.push(
             <Pressable
               key={`${row}-${col}`}
-              onPress={() => console.log(currentDay)}>
-              <Day>{currentDay}</Day>
+              onPress={() => {
+                const year = currentDate.format('YYYY');
+                const month = currentDate.format('MM');
+                onPressDay(`${year}-${month}-${currentDay}`);
+              }}>
+              <Day
+                color={col === 0 ? 'red' : '#000'}
+                bgColor={
+                  `${moment(currentDate).format('YYYY-MM')}-${currentDay}` ===
+                  selectedDate
+                    ? '#eee'
+                    : '#fff'
+                }>
+                {currentDay}
+              </Day>
             </Pressable>,
           );
           day++;
@@ -58,18 +79,21 @@ const Calendar = () => {
 
   return (
     <Container>
+      <Year>{currentDate.format('YYYY')}</Year>
       <Nav>
         <Pressable onPress={prevMonth}>
-          <Text>Prev</Text>
+          <Text>{'<'}</Text>
         </Pressable>
-        <Text>{currentDate.format('MMMM YYYY')}</Text>
+        <Month>{currentDate.format('M')}</Month>
         <Pressable onPress={nextMonth}>
-          <Text>Next</Text>
+          <Text>{'>'}</Text>
         </Pressable>
       </Nav>
       <Head>
-        {['월', '화', '수', '목', '금', '토', '일'].map((day, index) => (
-          <Day key={day}>{day}</Day>
+        {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
+          <Day>
+            <DayName key={day}>{day}</DayName>
+          </Day>
         ))}
       </Head>
       {weeks.map((week, index) => {
@@ -80,6 +104,10 @@ const Calendar = () => {
 };
 
 export default Calendar;
+
+type Props = {
+  onPressDay: (date: string) => void;
+};
 
 const Container = styled(View)`
   width: 100%;
@@ -95,7 +123,15 @@ const Head = styled(View)`
   flex-direction: row;
   justify-content: center;
 `;
-
+const Year = styled(Text)`
+  font-size: 15px;
+  padding: 5px 0;
+  text-align: center;
+`;
+const Month = styled(Text)`
+  font-size: 20px;
+  font-weight: bold;
+`;
 const Week = styled(View)`
   display: flex;
   flex-direction: row;
@@ -103,7 +139,12 @@ const Week = styled(View)`
   align-items: center;
   justify-content: center;
 `;
-const Day = styled(Text)`
+const DayName = styled(Text)`
+  font-size: 14px;
+  color: #999;
+  text-align: center;
+`;
+const Day = styled(Text)<{color?: string; bgColor?: string}>`
   width: ${width};
   height: 40px;
   margin-top: ${marginVertical};
@@ -113,5 +154,6 @@ const Day = styled(Text)`
   text-align: center;
   line-height: 40px;
   font-weight: bold;
-  background-color: #eee;
+  color: ${props => props.color || '#000'};
+  background-color: ${props => props.bgColor || '#fff'};
 `;

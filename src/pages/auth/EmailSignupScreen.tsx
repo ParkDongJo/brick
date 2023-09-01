@@ -1,7 +1,6 @@
 import React, {Suspense} from 'react';
 import {View, ActivityIndicator} from 'react-native';
 import styled from 'styled-components';
-import {useSetRecoilState} from 'recoil';
 import EmailPwdForm from './../../components/organisms/EmailPwdForm';
 import UserDetailForm, {
   FormData as UserDetailFormData,
@@ -11,7 +10,6 @@ import {Gender, Role} from '../../constants';
 import useAuth, {AuthResponse} from './../../hooks/useAuth';
 import BasicButton from '../../components/atoms/BasicButton';
 import useToast from '../../hooks/useToast';
-import {tokenAtom} from './../../store/atoms/auth';
 import {useNavigation} from '@react-navigation/native';
 import {useQueryClient, MutationFunction} from '@tanstack/react-query';
 import useQueries, {QUERY_KEY} from '../../hooks/useQueries';
@@ -20,7 +18,6 @@ import useUser from '../../hooks/useUser';
 
 const EmailSignupScreen: React.FC = () => {
   const navigation = useNavigation();
-  const setToken = useSetRecoilState(tokenAtom);
   const {show: showToast} = useToast();
   const {signUpEmail} = useAuth();
   const queryClient = useQueryClient();

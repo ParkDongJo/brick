@@ -10,7 +10,6 @@ import RadioButtons from '../../components/organisms/RadioButtons';
 import LoginForm, {FORM_TYPE} from '../../components/organisms/LoginForm';
 import useAuth, {ResponseSignIn} from '../../hooks/useAuth';
 import useToast from '../../hooks/useToast';
-import {tokenAtom} from '../../store/atoms/auth';
 import {Gender, Role} from '../../constants';
 
 const UserFormScreen: React.FC = () => {

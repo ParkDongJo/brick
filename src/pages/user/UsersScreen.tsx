@@ -17,7 +17,11 @@ import useUser from '../../hooks/useUser';
 import useAuth from '../../hooks/useAuth';
 import UserList from '../../components/organisms/UserList';
 import PageModal from '../../components/organisms/PageModal';
-import EmailInput from '../../components/organisms/EmailInput';
+import AddUser from '../../components/organisms/AddUser';
+import UserSections from '../../components/organisms/UserSections';
+import users from '../../../fixtures/users';
+import RadioButtons from '../../components/organisms/RadioButtons';
+import StyledText from '../../components/atoms/StyledText';
 
 const UsersScreen: React.FC<Props> = ({navigation}) => {
   const queryClient = useQueryClient();
@@ -27,22 +31,26 @@ const UsersScreen: React.FC<Props> = ({navigation}) => {
   const {addUser, getUsers} = useUser(mutation);
   const {getUid} = useAuth();
   const {isLoading: isLoadingMe, data: me} = useQueryMe(QUERY_KEY.ME, getUid());
-  const {isLoading: isLoadingUsers, data: users} = useQueryUsers(
+  const {isLoading: isLoadingUsers, data: usersv2} = useQueryUsers(
     QUERY_KEY.USERS,
     getUid(),
   );
-  const [visibleForModal, setVisibleForModal] = useState(false);
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerRight: () => (
-        <Button onPress={() => console.log('Test')} title="Update count" />
+      headerLeft: () => (
+        <Button
+          onPress={() => {
+            navigation.goBack();
+          }}
+          title="Back"
+        />
       ),
     });
   }, [navigation]);
 
-  const onClickAddButton = () => {
-    setVisibleForModal(true);
+  const navigateToForm = () => {
+    navigation.navigate('AddUserForm');
   };
   const addMyRunner = async (email: string) => {
     if (!me) {
@@ -79,23 +87,25 @@ const UsersScreen: React.FC<Props> = ({navigation}) => {
 
   return (
     <Container>
-      <UserList datas={users || []} />
+      <UserSections
+        datas={[
+          {
+            title: '코치목록',
+            data: users,
+          },
+          {
+            title: '선수목록',
+            data: users,
+          },
+          {
+            title: '대기목록',
+            data: users,
+          },
+        ]}
+      />
       <Bottom>
-        <BottomButton title="추가하기" onPress={onClickAddButton} />
+        <BottomButton title="추가하기" onPress={navigateToForm} />
       </Bottom>
-      <PageModal
-        visible={visibleForModal}
-        close={() => setVisibleForModal(false)}>
-        <EmailInput
-          title={'매니징 할 사용자의 이메일 입력하세요.'}
-          onCancel={() => setVisibleForModal(false)}
-          onComplete={(email: string) => {
-            setVisibleForModal(false);
-            addMyRunner(email);
-          }}
-        />
-      </PageModal>
-      <AlertModal ref={modalRef} />
     </Container>
   );
 };
@@ -106,6 +116,14 @@ type Props = {} & NativeStackScreenProps<MainStackScreensParamList, 'Users'>;
 const Container = styled(View)`
   flex: 1;
   height: 100%;
+  background-color: #fff;
+`;
+
+const Header = styled(View)`
+  width: 100%;
+  height: 50px;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 const Bottom = styled(View)`
   position: absolute;

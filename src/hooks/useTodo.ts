@@ -15,6 +15,17 @@ const useTodo = (mutation?: UseMutationResult) => {
     }
     return result.map(tag => tag.replace('#', ''));
   };
+  const mergeTodoByTitle = (todos: Todo[]) => {
+    return todos.reduce((acc, cur) => {
+      const target = acc.find(item => item.title === cur.target.title);
+      if (target) {
+        target.data.push(cur);
+      } else {
+        acc.push({title: cur.target.title, data: [cur]});
+      }
+      return acc;
+    }, [] as {title: string; data: Todo[]}[]);
+  };
   const addTodo = (newTodo: FormData) => {
     const {} = newTodo;
     mutation?.mutate({
@@ -35,6 +46,7 @@ const useTodo = (mutation?: UseMutationResult) => {
   return {
     addTodo,
     convertTags,
+    mergeTodoByTitle,
   };
 };
 export default useTodo;
